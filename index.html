@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset="UTF-8"></meta>
+    <title>Sunrise Tracker</title>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="js/angular.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
+  </head>
+  <body ng-app="sunrise-times" ng-controller="MainCtrl">
+    <div class="container">
+      <div ng-repeat="post in posts">
+        {{post.address}}   {{post.startDate}}   {{post.endDate}}
+      </div>
+
+      <div class="separator" style="height: 80px;">
+      </div>
+
+      <form ng-submit="getTimes()">
+        <label>Address</label>
+        <input type="text" ng-model="address"></input>
+        <label>City</label>
+        <input type="text" ng-model="city"></input>
+        <label>State</label>
+        <input type="text" ng-model="state"></input>
+        <br></br>
+        <label>Start Date</label>
+        <input type="date" ng-model="startDate"></input>
+        <label>End Date</label>
+        <input type="date" ng-model="endDate"></input>
+        <button type="submit" class="btn">Get Sunrise Times</button>
+      </form>
+      <div id="sunrises">
+      </div>
+
+      <a href="http://sunrise-sunset.org/">this is the sunset api</a>
+    </div>
+  </body>
+</html>

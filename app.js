@@ -3,10 +3,8 @@ var app = angular.module("sunrise-times", []);
 app.controller('MainCtrl', [
 	'$scope',
 	function($scope){
-		$scope.posts = [];
-
+		$scope.times = [];
 		$scope.getTimes = function() {
-
 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
 			address = address.toString();
 
@@ -32,7 +30,9 @@ app.controller('MainCtrl', [
 											    		dataType: "JSONP",
 											    		success: function(data) {
 											    			$("#sunrises").append("<div class='sunrise sunrise" + i + "'>" + data.results.sunrise + "</div>");
-											    			i += 1;
+											    			// $scope.sunrise = data.results.sunrise;
+											    			$scope.times.push({sunrise: data.results.sunrise});
+;											    			i += 1;
 											    			return data;
 											    		}
 														}); //end of api call

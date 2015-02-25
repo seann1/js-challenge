@@ -11,8 +11,8 @@
   </head>
   <body ng-app="sunrise-times" ng-controller="MainCtrl">
     <div class="container">
-      <div ng-repeat="post in posts">
-        {{post.address}}   {{post.startDate}}   {{post.endDate}}
+      <div ng-repeat="time in times">
+        {{time.sunrise}}
       </div>
 
       <div class="separator" style="height: 80px;">

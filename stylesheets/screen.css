@@ -74,3 +74,11 @@ table.sortable thead {
   font-weight: bold;
   cursor: default;
 }
+
+/* line 16, ../sass/screen.scss */
+td {
+  padding: 5px;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+}

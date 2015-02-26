@@ -24,12 +24,13 @@ app.controller('MainCtrl', [
 	   			while (startDateMilli <= endDateMilli) {
 
 	   				var currentDate = new Date(startDateMilli);
+	   				var splitDate = currentDate.toString().split(" ").slice(0, 4).join(" ");
 	 					var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + results[0].geometry.location.lng() + "&lng=" + results[0].geometry.location.lat() + "&date=" + currentDate + "&callback=mycallback";
 			   		var response = $.ajax({
 											    		url: sunriseurl,
 											    		dataType: "JSONP",
 											    		success: function(data) {
-											    			$("#sunrises").append("<tr class='day day" + i + "'><td>" + currentDate + "</td><td>" + data.results.sunrise + "</td></tr>");
+											    			$("#sunrises").append("<tr class='day day" + i + "'><td>" + splitDate + "</td><td>" + data.results.sunrise + "</td></tr>");
 											    			// $scope.sunrise = data.results.sunrise;
 											    			times.push("arf");
 										    			i += 1;

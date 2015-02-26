@@ -3,7 +3,6 @@ var app = angular.module("sunrise-times", []);
 app.controller('MainCtrl', [
 	'$scope',
 	function($scope){
-		$scope.times = [];
 		$scope.getTimes = function() {
 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
 			address = address.toString();
@@ -21,6 +20,7 @@ app.controller('MainCtrl', [
 
    		//make api call inside of call to google maps api
    			var i = 0;
+   			var times = [];
 	   			while (startDateMilli <= endDateMilli) {
 
 	   				var currentDate = new Date(startDateMilli);
@@ -29,15 +29,16 @@ app.controller('MainCtrl', [
 											    		url: sunriseurl,
 											    		dataType: "JSONP",
 											    		success: function(data) {
-											    			$("#sunrises").append("<div class='sunrise sunrise" + i + "'>" + data.results.sunrise + "</div>");
+											    			$("#sunrises").append("<tr class='day day" + i + "'><td>" + currentDate + "</td><td>" + data.results.sunrise + "</td></tr>");
 											    			// $scope.sunrise = data.results.sunrise;
-											    			$scope.times.push({sunrise: data.results.sunrise});
-;											    			i += 1;
+											    			times.push("arf");
+										    			i += 1;
 											    			return data;
 											    		}
 														}); //end of api call
 			   		console.log(response);
 						startDateMilli += 86400000;
+						console.log(times);
 			   	} //end of while loop
   			}
 			});

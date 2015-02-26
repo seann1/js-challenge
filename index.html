@@ -8,15 +8,21 @@
     <script src="js/sorttable.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
+    <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
   </head>
   <body ng-app="sunrise-times" ng-controller="MainCtrl">
     <div class="container">
-      <div ng-repeat="time in times">
-        {{time.sunrise}}
-      </div>
 
       <div class="separator" style="height: 80px;">
       </div>
+
+      <table class="sortable">
+      <thead>
+        <tr><th>Date</th><th>Sunrise</th><th>Sunset</th><th>Day Length</th></tr>
+      </thead>
+      <tbody id="sunrises">
+      </tbody>
+      </table>
 
       <form ng-submit="getTimes()">
         <label>Address</label>
@@ -32,8 +38,6 @@
         <input type="date" ng-model="endDate"></input>
         <button type="submit" class="btn">Get Sunrise Times</button>
       </form>
-      <div id="sunrises">
-      </div>
 
       <a href="http://sunrise-sunset.org/">this is the sunset api</a>
     </div>

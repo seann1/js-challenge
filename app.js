@@ -20,20 +20,26 @@ app.controller('MainCtrl', [
   			{
 
    		//make api call inside of call to google maps api
-   			var i = 0;
+   			  var i = 0;
 	   			while (startDateMilli <= endDateMilli) {
 
 	   				var currentDate = new Date(startDateMilli);
 	   				var splitDate = currentDate.toString().split(" ").slice(1, 4).join(" ");
+	   				var splitDashDate = moment(currentDate).format('YYYY-MM-DD');
 	   				dates.push(splitDate);
-	 					var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + results[0].geometry.location.lng() + "&lng=" + results[0].geometry.location.lat() + "&date=" + currentDate + "&callback=mycallback";
+	   				console.log(splitDashDate);
+
+	   				var latitude = results[0].geometry.location.lat();
+	   				var longitude = results[0].geometry.location.lng();
+	 					var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + latitude + "&lng=" + longitude + "&date=" + splitDashDate + "&callback=mycallback";
+	 					console.log(sunriseurl);
 			   		var response = $.ajax({
 											    		url: sunriseurl,
 											    		dataType: "JSONP",
 											    		success: function(data) {
-											    			$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + data.results.sunrise + "</td><td>" + data.results.sunset + "</td><td>" + data.results.day_length + "</td></tr>");
+											    			$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + data.results.sunrise + "</td><td>" + data.results.sunset + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default'>More Info</button></td></tr>");
 											    			// $scope.sunrise = data.results.sunrise;
-										    			i += 1;
+										    			  i += 1;
 											    			return data;
 											    		}
 														}).done(function() {

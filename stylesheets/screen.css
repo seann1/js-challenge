@@ -76,6 +76,11 @@ table.sortable thead {
 }
 
 /* line 16, ../sass/screen.scss */
+.sortable {
+  width: 100%;
+}
+
+/* line 20, ../sass/screen.scss */
 td {
   padding: 5px;
   border-color: black;

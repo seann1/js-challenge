@@ -87,3 +87,9 @@ td {
   border-width: 2px;
   border-style: solid;
 }
+
+/* line 27, ../sass/screen.scss */
+.modal-details {
+  padding: 5px;
+  margin: 5px;
+}

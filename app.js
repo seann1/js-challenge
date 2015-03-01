@@ -37,9 +37,13 @@ app.controller('MainCtrl', [
 											    		url: sunriseurl,
 											    		dataType: "JSONP",
 											    		success: function(data) {
-											    			$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + data.results.sunrise + "</td><td>" + data.results.sunset + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default' data-toggle='modal' data-target='#modal" + i + "'>More Info</button></td></tr>");
+
+											    			var sunrise = moment.tz(splitDashDate + " " + data.results.sunrise, "UTC");
+											    			sunrise = sunrise.tz("America/Los_Angeles").format("hh:mm:ss");
+
+											    			$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + sunrise + "</td><td>" + data.results.sunset + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default' data-toggle='modal' data-target='#modal" + i + "'>More Info</button></td></tr>");
 											    			$(".modals").append('<div class="modal fade" id="modal' + i + '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body">' + '<div class="modal-details">Astronomical twilight Begins: ' + data.results.astronomical_twilight_begin + '</div>' + '<div class="modal-details">Astronomical Twilight Ends: ' + data.results.astronomical_twilight_end + '</div><div class="modal-details">Civil Twilight Begins: ' + data.results.civil_twilight_begin + '</div><div class="modal-details">Civil Twilight Ends: ' + data.results.civil_twilight_end + '</div>' + '<div class="modal-details">Nautical Twilight Begins: ' + data.results.nautical_twilight_begin + '</div><div class="modal-details">Nautical Twilight Ends: ' + data.results.nautical_twilight_end + '</div><div class="modal-details">Solar Noon: ' + data.results.solar_noon + '</div><div class="modal-footer"></div></div></div></div>');
-											    			// $scope.sunrise = data.results.sunrise;
+
 										    			  i += 1;
 											    			return data;
 											    		}
@@ -50,7 +54,6 @@ app.controller('MainCtrl', [
 														}); //end of api call
 			   		console.log(response);
 						startDateMilli += 86400000;
-						console.log(dates);
 			   	} //end of while loop
   			}
 			}); //endof geocoder

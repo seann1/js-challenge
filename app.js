@@ -11,6 +11,7 @@ app.controller('MainCtrl', [
 			var startDateMilli = new Date($scope.startDate).getTime();
 			var endDateMilli = new Date($scope.endDate).getTime();
 			var dates = [];
+			console.log($scope.timeZone);
 
 
 
@@ -27,7 +28,6 @@ app.controller('MainCtrl', [
 	   				var splitDate = moment(currentDate).format("M-D-YYYY");
 	   				var splitDashDate = moment(currentDate).format('YYYY-MM-DD');
 	   				dates.push(splitDate);
-	   				console.log(moment.tz.names());
 	   				var latitude = results[0].geometry.location.lat();
 	   				var longitude = results[0].geometry.location.lng();
 	 					var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + latitude + "&lng=" + longitude + "&date=" + splitDashDate + "&callback=mycallback";
@@ -63,6 +63,5 @@ app.controller('MainCtrl', [
 			$scope.state = '';
 			$scope.startDate = '';
 			$scope.endDate = '';
-
 		}; //end of getTimes();
 	}]);

@@ -33,6 +33,22 @@
         <input type="date" ng-model="startDate"></input>
         <label>End Date</label>
         <input type="date" ng-model="endDate"></input>
+        <label>Time Zone</label>
+        <select ng-model="timeZone">
+          <option value="current">My Current Timezone</option>
+          <option value="US/Pacific">US Pacific</option>
+          <option value="US/Eastern">US Eastern</option>
+          <option value="US/Mountain">US Mountain</option>
+          <option value="US/Hawaii">US Hawaii</option>
+          <option value="Australia/Sydney">Australia/Sydney</option>
+          <option value="Europe/Paris">Europe/Paris</option>
+          <option value="Hongkong">Hong Kong</option>
+          <option value="Turkey">Turkey</option>
+          <option value="Mexico/General">Mexico General</option>
+          <option value="Iran">Iran</option>
+          <option value="Japan">Japan</option>
+          <option value="Asia/Dubai">Asai/Dubai</option>
+        </select>
         <button type="submit" class="btn">Get Sunrise Times</button>
       </form>
       <div class="row">

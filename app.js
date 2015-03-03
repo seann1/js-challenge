@@ -11,7 +11,7 @@ app.controller('MainCtrl', [
 			var startDateMilli = new Date($scope.startDate).getTime();
 			var endDateMilli = new Date($scope.endDate).getTime();
 			var dates = [];
-			console.log($scope.timeZone);
+			console.log($scope.zone);
 
 
 
@@ -26,6 +26,7 @@ app.controller('MainCtrl', [
 
 	   				var currentDate = new Date(startDateMilli);
 	   				var splitDate = moment(currentDate).format("M-D-YYYY");
+	   				var dashDate = moment(currentDate).format("M/D/YYYY");
 	   				var splitDashDate = moment(currentDate).format('YYYY-MM-DD');
 	   				dates.push(splitDate);
 	   				var latitude = results[0].geometry.location.lat();
@@ -35,16 +36,20 @@ app.controller('MainCtrl', [
 											    		url: sunriseurl,
 											    		dataType: "JSONP",
 											    		success: function(data) {
+												    			function toTimeZone(time) {
+												    				if ($scope.zone.toString() === "current") {
+												    					var date = new Date(dashDate + " " + time + " UTC");
+												    					return moment(date).format("h:mm:ss a");
+												    				} else {
+												    					var timezone = $scope.zone;
+													    				var sunrise = moment.tz(splitDashDate + " " + time, "UTC");
+													    				sunrise = sunrise.tz(timezone).format("h:mm:ss a");
+													    				return sunrise;
+												    				}
+												    			}
 
-											    			function toTimeZone(time) {
-											    				var sunrise = moment.tz(splitDashDate + " " + time, "UTC");
-											    				sunrise = sunrise.tz("America/Los_Angeles").format("h:mm:ss a");
-											    				return sunrise;
-											    			}
-
-											    			$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + toTimeZone(data.results.sunrise) + "</td><td>" + toTimeZone(data.results.sunset) + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default' data-toggle='modal' data-target='#modal" + i + "'>More Info</button></td></tr>");
-											    			$(".modals").append('<div class="modal fade" id="modal' + i + '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">' + splitDate + '</h4></div><div class="modal-body">' + '<div class="modal-details">Astronomical twilight Begins: ' + toTimeZone(data.results.astronomical_twilight_begin) + '</div>' + '<div class="modal-details">Astronomical Twilight Ends: ' + toTimeZone(data.results.astronomical_twilight_end) + '</div><div class="modal-details">Civil Twilight Begins: ' + toTimeZone(data.results.civil_twilight_begin) + '</div><div class="modal-details">Civil Twilight Ends: ' + toTimeZone(data.results.civil_twilight_end) + '</div>' + '<div class="modal-details">Nautical Twilight Begins: ' + toTimeZone(data.results.nautical_twilight_begin) + '</div><div class="modal-details">Nautical Twilight Ends: ' + toTimeZone(data.results.nautical_twilight_end) + '</div><div class="modal-details">Solar Noon: ' + toTimeZone(data.results.solar_noon) + '</div><div class="modal-footer"></div></div></div></div>');
-
+												    			$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + toTimeZone(data.results.sunrise) + "</td><td>" + toTimeZone(data.results.sunset) + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default' data-toggle='modal' data-target='#modal" + i + "'>More Info</button></td></tr>");
+											    				$(".modals").append('<div class="modal fade" id="modal' + i + '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">' + splitDate + '</h4></div><div class="modal-body">' + '<div class="modal-details">Astronomical twilight Begins: ' + toTimeZone(data.results.astronomical_twilight_begin) + '</div>' + '<div class="modal-details">Astronomical Twilight Ends: ' + toTimeZone(data.results.astronomical_twilight_end) + '</div><div class="modal-details">Civil Twilight Begins: ' + toTimeZone(data.results.civil_twilight_begin) + '</div><div class="modal-details">Civil Twilight Ends: ' + toTimeZone(data.results.civil_twilight_end) + '</div>' + '<div class="modal-details">Nautical Twilight Begins: ' + toTimeZone(data.results.nautical_twilight_begin) + '</div><div class="modal-details">Nautical Twilight Ends: ' + toTimeZone(data.results.nautical_twilight_end) + '</div><div class="modal-details">Solar Noon: ' + toTimeZone(data.results.solar_noon) + '</div><div class="modal-footer"></div></div></div></div>');
 										    			  i += 1;
 											    			return data;
 											    		}

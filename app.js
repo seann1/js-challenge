@@ -11,6 +11,12 @@ app.controller('MainCtrl', [
 	    $scope[opened] = true;
   	};
 
+  	$scope.loadAddress = function() {
+  		$scope.address = "350 5th Avenue";
+  		$scope.city = "New York"
+  		$scope.state = "NY";
+  	}
+
 		$scope.getTimes = function() {
 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
 			address = address.toString();
@@ -19,7 +25,6 @@ app.controller('MainCtrl', [
 			var startDateMilli = new Date($scope.startDate).getTime();
 			var endDateMilli = new Date($scope.endDate).getTime();
 			var dates = [];
-			console.log($scope.zone);
 
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode( { 'address': address}, function(results, status) {
@@ -48,6 +53,7 @@ app.controller('MainCtrl', [
 												    					var timezone = $("#zone").val();
 													    				var sunrise = moment.tz(splitDashDate + " " + time, "UTC");
 													    				return sunrise.tz(timezone).format("h:mm:ss a");
+													    				console.log(timezone);
 												    				}
 												    			}
 

@@ -69,26 +69,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 
 /* line 8, ../sass/screen.scss */
 table.sortable thead {
-  background-color: #eee;
-  color: #666666;
   font-weight: bold;
-  cursor: default;
+  cursor: pointer;
 }
 
-/* line 16, ../sass/screen.scss */
+/* line 14, ../sass/screen.scss */
 .sortable {
   width: 100%;
+  margin-top: 10px;
 }
 
-/* line 20, ../sass/screen.scss */
+/* line 19, ../sass/screen.scss */
 td {
-  padding: 5px;
-  border-color: black;
-  border-width: 2px;
-  border-style: solid;
+  padding: 5px !important;
 }
 
-/* line 27, ../sass/screen.scss */
+/* line 26, ../sass/screen.scss */
 .modal-details {
   padding: 5px;
   margin: 5px;

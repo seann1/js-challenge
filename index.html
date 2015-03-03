@@ -8,19 +8,18 @@
     <script src="js/sorttable.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/moment-timezone-with-data.min.js"></script>
+    <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
     <script src="js/bootstrap.js"></script>
     <script src="js/ui-bootstrap-tpls.js"></script>
     <script src="app.js"></script>
-    <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
   </head>
   <body ng-app="sunrise-times" ng-controller="MainCtrl">
     <div class="container">
 
       <div class="separator" style="height: 80px;">
       </div>
-      <div class="date">
-      </div>
+      <button class="btn btn-default" ng-click="loadAddress()">Load Sample Address</button>
 
       <form ng-submit="getTimes()">
         <div class="row">
@@ -53,12 +52,9 @@
               <input type="text" datepicker-popup="MM-dd-yyyy" ng-model="endDate" is-open="opened2" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"/>
               <button class="btn" ng-click="open($event,'opened2')"><span class="glyphicon glyphicon-calendar"></span></button>
             </p>
-        </div>
-    </div>
+        </div><!-- end of end date columns -->
 
-    <div class="col-md-6">
-      <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label>Time Zone</label>
           <select id="zone" class="form-control">
             <option value="current">My Current Timezone</option>
@@ -76,18 +72,19 @@
             <option value="Asia/Dubai">Asai/Dubai</option>
           </select>
         </div>
-      </div>
-    </div>
+      </div><!-- end of inputs row -->
 
       <div class="row">
-        <button type="submit" class="btn">Get Sunrise Times</button>
-      </form>
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-default">Get Sunrise Times</button>
+          </form>
+        </div>
       </div>
 
 
       <div class="row">
         <div class="col-md-12">
-        <table class="sortable">
+        <table class="sortable table-striped table-bordered">
         <thead>
           <tr><th>Date</th><th>Sunrise</th><th>Sunset</th><th>Day Length</th><th></th></tr>
         </thead>
@@ -98,6 +95,5 @@
         <div class="row modals">
       </div>
     </div>
-  </div>
 </body>
 </html>

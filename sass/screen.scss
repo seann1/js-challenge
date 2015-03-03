@@ -6,22 +6,21 @@
 @import "compass/reset";
 
 table.sortable thead {
-    background-color:#eee;
-    color:#666666;
     font-weight: bold;
-    cursor: default;
+    cursor: pointer;
 
 }
 
 .sortable {
 	width: 100%;
+	margin-top: 10px;
 }
 
 td {
-	padding: 5px;
-	border-color: black;
-	border-width: 2px;
-	border-style: solid;
+	padding: 5px !important;
+	// border-color: black;
+	// border-width: 1px;
+	// border-style: solid;
 }
 
 .modal-details {

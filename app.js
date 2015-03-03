@@ -41,11 +41,11 @@ app.controller('MainCtrl', [
 											    		dataType: "JSONP",
 											    		success: function(data) {
 												    			function toTimeZone(time) {
-												    				if ($scope.zone.toString() === "current") {
+												    				if ($("#zone").val().toString() === "current") {
 												    					var date = new Date(dashDate + " " + time + " UTC");
 												    					return moment(date).format("h:mm:ss a");
 												    				} else {
-												    					var timezone = $scope.zone;
+												    					var timezone = $("#zone").val();
 													    				var sunrise = moment.tz(splitDashDate + " " + time, "UTC");
 													    				return sunrise.tz(timezone).format("h:mm:ss a");
 												    				}
@@ -73,6 +73,7 @@ app.controller('MainCtrl', [
 		$scope.endDate = '';
 	}; //end of getTimes();
 	function init() {
+		$scope.endDate = new Date;
 	}
 	init();
 }]);

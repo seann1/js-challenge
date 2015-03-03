@@ -1,4 +1,4 @@
-var app = angular.module("sunrise-times", []);
+var app = angular.module("sunrise-times", ['ui.bootstrap']);
 
 app.controller('MainCtrl', [
 	'$scope',
@@ -13,14 +13,10 @@ app.controller('MainCtrl', [
 			var dates = [];
 			console.log($scope.zone);
 
-
-
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode( { 'address': address}, function(results, status) {
   			if (status == google.maps.GeocoderStatus.OK)
   			{
-
-   		//make api call inside of call to google maps api
    			  var i = 0;
 	   			while (startDateMilli <= endDateMilli) {
 
@@ -43,8 +39,7 @@ app.controller('MainCtrl', [
 												    				} else {
 												    					var timezone = $scope.zone;
 													    				var sunrise = moment.tz(splitDashDate + " " + time, "UTC");
-													    				sunrise = sunrise.tz(timezone).format("h:mm:ss a");
-													    				return sunrise;
+													    				return sunrise.tz(timezone).format("h:mm:ss a");
 												    				}
 												    			}
 
@@ -63,10 +58,13 @@ app.controller('MainCtrl', [
   			}
 			}); //endof geocoder
 
-			$scope.address = '';
-			$scope.city = '';
-			$scope.state = '';
-			$scope.startDate = '';
-			$scope.endDate = '';
-		}; //end of getTimes();
-	}]);
+		$scope.address = '';
+		$scope.city = '';
+		$scope.state = '';
+		$scope.startDate = '';
+		$scope.endDate = '';
+	}; //end of getTimes();
+	function init() {
+	}
+	init();
+}]);

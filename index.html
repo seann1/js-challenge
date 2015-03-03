@@ -8,6 +8,7 @@
     <script src="js/sorttable.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/moment-timezone-with-data.min.js"></script>
+    <script src="js/ui-bootstrap-tpls.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
     <script src="js/bootstrap.js"></script>
@@ -32,7 +33,7 @@
         <label>Start Date</label>
         <input type="date" ng-model="startDate"></input>
         <label>End Date</label>
-        <input type="date" ng-model="endDate" id="endDate" data-ng-init="init()"></input>
+        <datepicker ng-model="endDate" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
         <label>Time Zone</label>
         <select ng-model="zone" id="zone">
           <option value="current">My Current Timezone</option>

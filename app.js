@@ -73,7 +73,9 @@ app.controller('MainCtrl', [
 		$scope.endDate = '';
 	}; //end of getTimes();
 	function init() {
-		$scope.endDate = new Date;
+		var oneWeekAgo = new Date();
+		$scope.startDate = oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+		$scope.endDate = moment(new Date).format();
 	}
 	init();
 }]);

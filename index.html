@@ -8,10 +8,10 @@
     <script src="js/sorttable.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/moment-timezone-with-data.min.js"></script>
-    <script src="js/ui-bootstrap-tpls.js"></script>
-    <script src="app.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
     <script src="js/bootstrap.js"></script>
+    <script src="js/ui-bootstrap-tpls.js"></script>
+    <script src="app.js"></script>
     <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
   </head>
   <body ng-app="sunrise-times" ng-controller="MainCtrl">
@@ -31,9 +31,27 @@
         <input type="text" ng-model="state"></input>
         <br></br>
         <label>Start Date</label>
-        <input type="date" ng-model="startDate"></input>
+
+      <div class="row">
+        <div class="col-md-4">
+          <p class="input-group">
+            <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="startDate" is-open="opened1" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"/>
+            <button class="btn" ng-click="open($event,'opened1')"><span class="glyphicon glyphicon-calendar"></span></button>
+          </p>
+        </div>
+      </div>
+
         <label>End Date</label>
-        <datepicker ng-model="endDate" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+
+      <div class="row">
+        <div class="col-md-4">
+          <p class="input-group">
+            <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="endDate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"/>
+            <button class="btn" ng-click="open($event,'opened2')"><span class="glyphicon glyphicon-calendar"></span></button>
+          </p>
+        </div>
+      </div>
+
         <label>Time Zone</label>
         <select ng-model="zone" id="zone">
           <option value="current">My Current Timezone</option>

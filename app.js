@@ -3,6 +3,14 @@ var app = angular.module("sunrise-times", ['ui.bootstrap']);
 app.controller('MainCtrl', [
 	'$scope',
 	function($scope){
+
+  	$scope.open = function($event, opened) {
+	    $event.preventDefault();
+	    $event.stopPropagation();
+
+	    $scope[opened] = true;
+  	};
+
 		$scope.getTimes = function() {
 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
 			address = address.toString();

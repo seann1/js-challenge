@@ -77,6 +77,10 @@ app.controller('MainCtrl', [
 															}
 														}); //end of api call
 						startDateMilli += 86400000;
+
+						for (var i = 0; i <= moment.tz.names().length; i++) {
+							
+						}
 			   	} //end of while loop
   			}
 			}); //endof geocoder

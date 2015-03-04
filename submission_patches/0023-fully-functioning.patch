@@ -1,0 +1,253 @@
+From c79f0a4dd1eb3fd3c3122999acfe5d8024349bdc Mon Sep 17 00:00:00 2001
+From: Sean Niesen <seanniesen@gmail.com>
+Date: Tue, 3 Mar 2015 15:59:26 -0800
+Subject: [PATCH 23/25] fully functioning
+
+---
+ .../screen.scssc                                   | Bin 5646 -> 4816 bytes
+ app.js                                             |   8 ++++++-
+ index.html                                         |  24 +++++++++------------
+ sass/screen.scss                                   |  13 ++++++-----
+ stylesheets/screen.css                             |  16 ++++++--------
+ 5 files changed, 29 insertions(+), 32 deletions(-)
+
+diff --git a/.sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/screen.scssc b/.sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/screen.scssc
+index f8c14d98553ffe16781f160fe3d0860ffaca8c96..c28acf2da8b0d8d5aa6b8ec94e24f438c4b13962 100644
+GIT binary patch
+delta 1367
+zcmZux&ubGw80|>A+ucp`YqCvZw7ZE2wl>Yiq;1SxRt&Zkih@1a(<YnN#WWj|1*=6A
+zDSDAAet&>}fkN>w5IiYDd()F=J$d%zOtP6IC8uR(-h1Eo-h8u1izk=gCa&z*C97Jh
+z87tS8i-qcHeYI4qT2`&JQ!<Lya=l>Zi-khfE*_gFQ%Hn}FbAD!3~NGVvg$T$cq3#(
+zaWd<Ym`DOnkf=@yz6t9n1u-#?RJbKBP0@4nCY;R7!hPw2*m9kwS8v0ycqtU+%n)TJ
+z;cp}k|HKSR!o_I~g&~jQ5<8(da|`C>BZT33AiowOaf2ibS`m}0{F8G@R3g~#1yi2D
+z_1P*+;%1a2OiT=Cf(Y9p7)nWtk;n)yMv+0zi@|9$H5MZdVLmHr=*eJB6$0JfeJ%5V
+zxmQAaR(scJW<9qBmJ};Ud84&25NV6Zq)28=h5Av?bfZ!&%#~I6C8jFlFoSLwBhH<!
+z_Pm+s<v@f2BCNe7U))5mIKI~f?ss7}I1R&M;2uiQ{7E*^OTGIUO+7)y2dT4_1c#B8
+z8+f_3ucw{8mfQBMrgz45vR}`?yCmg>d1bbmW3y2ihZ{KW;<yv;{KJS)kU4+m7ckLB
+zj;GFDBFbcXTiD2K<`(p-+qUcNY|U-B?Xq5NSha^l*7^P;$MznS^?Yl8c(>y{Zq&<q
+z$89(^(HC+(qh+PzH0n){4&4O3<nw9&wiA8dCVJ1i?1g3ol5iTnjWjm!aA!)M*LtCM
+zKck^*BcW49WK+}o(tf1+NTfR4ok>;3VFqzB2IlebIDha)8K4`d?2DV|XZM*OMwj4w
+zB&LKoG|iq7h|vsuQLyrRXg`Zn>uD-Pu_pS%%k}0^>zgpqSI%K>RSvwq)y*=zkvT^`
+zy~7m*ld8slG7GBiNP}lbuZuo8B0rU7&(;rQsb$%=)7&lVqvJ_rDVG~R07D1E6Tr6N
+Hwff>eNsBut
+
+literal 5646
+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
+
+diff --git a/app.js b/app.js
+index 32070b5..69b8858 100644
+--- a/app.js
++++ b/app.js
+@@ -11,6 +11,12 @@ app.controller('MainCtrl', [
+ 	    $scope[opened] = true;
+   	};
+ 
++  	$scope.loadAddress = function() {
++  		$scope.address = "350 5th Avenue";
++  		$scope.city = "New York"
++  		$scope.state = "NY";
++  	}
++
+ 		$scope.getTimes = function() {
+ 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
+ 			address = address.toString();
+@@ -19,7 +25,6 @@ app.controller('MainCtrl', [
+ 			var startDateMilli = new Date($scope.startDate).getTime();
+ 			var endDateMilli = new Date($scope.endDate).getTime();
+ 			var dates = [];
+-			console.log($scope.zone);
+ 
+ 			var geocoder = new google.maps.Geocoder();
+ 			geocoder.geocode( { 'address': address}, function(results, status) {
+@@ -48,6 +53,7 @@ app.controller('MainCtrl', [
+ 												    					var timezone = $("#zone").val();
+ 													    				var sunrise = moment.tz(splitDashDate + " " + time, "UTC");
+ 													    				return sunrise.tz(timezone).format("h:mm:ss a");
++													    				console.log(timezone);
+ 												    				}
+ 												    			}
+ 
+diff --git a/index.html b/index.html
+index 1c8ff0a..524a002 100644
+--- a/index.html
++++ b/index.html
+@@ -8,19 +8,18 @@
+     <script src="js/sorttable.js"></script>
+     <script src="js/moment.js"></script>
+     <script src="js/moment-timezone-with-data.min.js"></script>
++    <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
+     <script src="js/bootstrap.js"></script>
+     <script src="js/ui-bootstrap-tpls.js"></script>
+     <script src="app.js"></script>
+-    <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+   </head>
+   <body ng-app="sunrise-times" ng-controller="MainCtrl">
+     <div class="container">
+ 
+       <div class="separator" style="height: 80px;">
+       </div>
+-      <div class="date">
+-      </div>
++      <button class="btn btn-default" ng-click="loadAddress()">Load Sample Address</button>
+ 
+       <form ng-submit="getTimes()">
+         <div class="row">
+@@ -53,12 +52,9 @@
+               <input type="text" datepicker-popup="MM-dd-yyyy" ng-model="endDate" is-open="opened2" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"/>
+               <button class="btn" ng-click="open($event,'opened2')"><span class="glyphicon glyphicon-calendar"></span></button>
+             </p>
+-        </div>
+-    </div>
++        </div><!-- end of end date columns -->
+ 
+-    <div class="col-md-6">
+-      <div class="row">
+-        <div class="col-md-4">
++        <div class="col-md-3">
+           <label>Time Zone</label>
+           <select id="zone" class="form-control">
+             <option value="current">My Current Timezone</option>
+@@ -76,18 +72,19 @@
+             <option value="Asia/Dubai">Asai/Dubai</option>
+           </select>
+         </div>
+-      </div>
+-    </div>
++      </div><!-- end of inputs row -->
+ 
+       <div class="row">
+-        <button type="submit" class="btn">Get Sunrise Times</button>
+-      </form>
++        <div class="col-md-12">
++          <button type="submit" class="btn btn-default">Get Sunrise Times</button>
++          </form>
++        </div>
+       </div>
+ 
+ 
+       <div class="row">
+         <div class="col-md-12">
+-        <table class="sortable">
++        <table class="sortable table-striped table-bordered">
+         <thead>
+           <tr><th>Date</th><th>Sunrise</th><th>Sunset</th><th>Day Length</th><th></th></tr>
+         </thead>
+@@ -98,6 +95,5 @@
+         <div class="row modals">
+       </div>
+     </div>
+-  </div>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/sass/screen.scss b/sass/screen.scss
+index 98d6e15..49c8d6c 100644
+--- a/sass/screen.scss
++++ b/sass/screen.scss
+@@ -6,22 +6,21 @@
+ @import "compass/reset";
+ 
+ table.sortable thead {
+-    background-color:#eee;
+-    color:#666666;
+     font-weight: bold;
+-    cursor: default;
++    cursor: pointer;
+ 
+ }
+ 
+ .sortable {
+ 	width: 100%;
++	margin-top: 10px;
+ }
+ 
+ td {
+-	padding: 5px;
+-	border-color: black;
+-	border-width: 2px;
+-	border-style: solid;
++	padding: 5px !important;
++	// border-color: black;
++	// border-width: 1px;
++	// border-style: solid;
+ }
+ 
+ .modal-details {
+diff --git a/stylesheets/screen.css b/stylesheets/screen.css
+index 7783948..f9da574 100644
+--- a/stylesheets/screen.css
++++ b/stylesheets/screen.css
+@@ -69,26 +69,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
+ 
+ /* line 8, ../sass/screen.scss */
+ table.sortable thead {
+-  background-color: #eee;
+-  color: #666666;
+   font-weight: bold;
+-  cursor: default;
++  cursor: pointer;
+ }
+ 
+-/* line 16, ../sass/screen.scss */
++/* line 14, ../sass/screen.scss */
+ .sortable {
+   width: 100%;
++  margin-top: 10px;
+ }
+ 
+-/* line 20, ../sass/screen.scss */
++/* line 19, ../sass/screen.scss */
+ td {
+-  padding: 5px;
+-  border-color: black;
+-  border-width: 2px;
+-  border-style: solid;
++  padding: 5px !important;
+ }
+ 
+-/* line 27, ../sass/screen.scss */
++/* line 26, ../sass/screen.scss */
+ .modal-details {
+   padding: 5px;
+   margin: 5px;
+-- 
+2.1.3.36.g8e36a6d
+

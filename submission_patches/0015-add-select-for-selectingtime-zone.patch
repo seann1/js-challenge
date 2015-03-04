@@ -1,0 +1,68 @@
+From f19fc1534cfdbc80499d775486f7782117148ebe Mon Sep 17 00:00:00 2001
+From: Sean Niesen <seanniesen@gmail.com>
+Date: Mon, 2 Mar 2015 14:56:11 -0800
+Subject: [PATCH 15/25] add select for selectingtime zone
+
+---
+ app.js     |  3 +--
+ index.html | 16 ++++++++++++++++
+ 2 files changed, 17 insertions(+), 2 deletions(-)
+
+diff --git a/app.js b/app.js
+index 43c9f6d..2273d7a 100644
+--- a/app.js
++++ b/app.js
+@@ -11,6 +11,7 @@ app.controller('MainCtrl', [
+ 			var startDateMilli = new Date($scope.startDate).getTime();
+ 			var endDateMilli = new Date($scope.endDate).getTime();
+ 			var dates = [];
++			console.log($scope.timeZone);
+ 
+ 
+ 
+@@ -27,7 +28,6 @@ app.controller('MainCtrl', [
+ 	   				var splitDate = moment(currentDate).format("M-D-YYYY");
+ 	   				var splitDashDate = moment(currentDate).format('YYYY-MM-DD');
+ 	   				dates.push(splitDate);
+-	   				console.log(moment.tz.names());
+ 	   				var latitude = results[0].geometry.location.lat();
+ 	   				var longitude = results[0].geometry.location.lng();
+ 	 					var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + latitude + "&lng=" + longitude + "&date=" + splitDashDate + "&callback=mycallback";
+@@ -63,6 +63,5 @@ app.controller('MainCtrl', [
+ 			$scope.state = '';
+ 			$scope.startDate = '';
+ 			$scope.endDate = '';
+-
+ 		}; //end of getTimes();
+ 	}]);
+\ No newline at end of file
+diff --git a/index.html b/index.html
+index 08e2e25..faf42d5 100644
+--- a/index.html
++++ b/index.html
+@@ -33,6 +33,22 @@
+         <input type="date" ng-model="startDate"></input>
+         <label>End Date</label>
+         <input type="date" ng-model="endDate"></input>
++        <label>Time Zone</label>
++        <select ng-model="timeZone">
++          <option value="current">My Current Timezone</option>
++          <option value="US/Pacific">US Pacific</option>
++          <option value="US/Eastern">US Eastern</option>
++          <option value="US/Mountain">US Mountain</option>
++          <option value="US/Hawaii">US Hawaii</option>
++          <option value="Australia/Sydney">Australia/Sydney</option>
++          <option value="Europe/Paris">Europe/Paris</option>
++          <option value="Hongkong">Hong Kong</option>
++          <option value="Turkey">Turkey</option>
++          <option value="Mexico/General">Mexico General</option>
++          <option value="Iran">Iran</option>
++          <option value="Japan">Japan</option>
++          <option value="Asia/Dubai">Asai/Dubai</option>
++        </select>
+         <button type="submit" class="btn">Get Sunrise Times</button>
+       </form>
+       <div class="row">
+-- 
+2.1.3.36.g8e36a6d
+

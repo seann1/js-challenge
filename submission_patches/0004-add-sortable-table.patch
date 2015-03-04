@@ -1,0 +1,573 @@
+From 83f3c138cfe2f6fe32871c0e69fa6d27b7727f6c Mon Sep 17 00:00:00 2001
+From: Sean Niesen <seanniesen@gmail.com>
+Date: Wed, 25 Feb 2015 23:19:40 -0800
+Subject: [PATCH 04/25] add sortable table
+
+---
+ .../ie.scssc                                       | Bin 0 -> 1189 bytes
+ .../print.scssc                                    | Bin 0 -> 1074 bytes
+ .../screen.scssc                                   | Bin 0 -> 3144 bytes
+ .../_reset.scssc                                   | Bin 0 -> 1014 bytes
+ .../_utilities.scssc                               | Bin 0 -> 43491 bytes
+ app.js                                             |   9 +--
+ config.rb                                          |  25 +++++++
+ index.html                                         |  14 ++--
+ sass/ie.scss                                       |   5 ++
+ sass/print.scss                                    |   3 +
+ sass/screen.scss                                   |  13 ++++
+ stylesheets/ie.css                                 |   5 ++
+ stylesheets/print.css                              |   3 +
+ stylesheets/screen.css                             |  76 +++++++++++++++++++++
+ 14 files changed, 144 insertions(+), 9 deletions(-)
+ create mode 100644 .sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/ie.scssc
+ create mode 100644 .sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/print.scssc
+ create mode 100644 .sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/screen.scssc
+ create mode 100644 .sass-cache/e31681ca07a1ce3225e17868c9d58c2368c1c4c0/_reset.scssc
+ create mode 100644 .sass-cache/fad09feeff97d6efe961cfe98a222963a4fcbc3c/_utilities.scssc
+ create mode 100644 config.rb
+ create mode 100644 sass/ie.scss
+ create mode 100644 sass/print.scss
+ create mode 100644 sass/screen.scss
+ create mode 100644 stylesheets/ie.css
+ create mode 100644 stylesheets/print.css
+ create mode 100644 stylesheets/screen.css
+
+diff --git a/.sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/ie.scssc b/.sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/ie.scssc
+new file mode 100644
+index 0000000000000000000000000000000000000000..d7652c2e6a1897e692ba45aad08d5b8559e52e83
+GIT binary patch
+literal 1189
+zcmeHGO>fgc5G@Fq*6D{-I26HQ>l0KYPSaYLO;TBcA|ml662u{@B6mHmx2(NpXOmF%
+z&ok>#sXfA(i|v`6*?E5R-cjec^O`*$g92gY0@&EX0$%u0ly#59ImDSbK8}0cxECKr
+zQ5?m+UKV$w?okxI$}@59KUmlN$v8#id}07N|Ejh9q%&yo?L-t(Wd^FLr}?wnMQ?Oj
+zLe<pyyp=3cHHWD;3hr;;3lG?LP(qi$tY%bL)8!rZ4Jj@pvRta>WND-YHacZkgOIrt
+zOfSF~nE^w4r2soVJ7A--*2doIoTIERC<c~mrS#H8?<XHWFl`w8oJ)d2z_{xj?6=!f
+znbVB36Bjc!P_p{L3Iq8t2v<`I0E?l7jzA1p37JfX0Scm`ddX^|FCDMC3YY;!2MsdU
+z6EJ&K!!WS$%Z5#F*bEu$Poc_We%5ZEu!GR!-syz<i7V!<N}DoOeQ&x(DZ&EM<6DWY
+z-2}W|BgQS1wMs1zl{^2byhEk$^*1JbHz`t_-3W8i-%48jO`>r(K|MDDW+tsJK=Zwo
+zT*pn4RPC}Gd?!Jh8at~sYX0<Y$rp{%E#hHw-)5ro9KkjlqK!5!{YTAV|1o9##3^|c
+z3`3H(!4M&>!naz?oiQ*JWTEhqkkVTesUlTgK#1f8CpIL-G{3W*$VTB{fCqof!ud+|
+zpDRIrTz!MloUQQQB*?Mv2mxLpiDsSf7;^3?=>7$s2EtBaAXT$}?A}W-En!x<$1*h)
+R`H`qyAA@xi(XNW?wcj)Ch3o(T
+
+literal 0
+HcmV?d00001
+
+diff --git a/.sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/print.scssc b/.sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/print.scssc
+new file mode 100644
+index 0000000000000000000000000000000000000000..b35b3a5972337613d30fb1625a619084e8bb7ec1
+GIT binary patch
+literal 1074
+zcmds$OK%e~6ord~hIZ12RJtgFg*7YaB9pdB9}Yp5c!)^6M1oj!5jit=G6s)5_&O<3
+z|0et&?l`R|OIWg*8DAgUXO6#n-0rr|+2avt$h=wr8+lm3lem|6dxzb#&hhcd(a~wQ
+z=uGpo)7~`e$@8f^JIqg@d!A3Ho%rs$<qt*@k@K+w;QXVt{+-RC#kWOPDxEtp7m?+U
+zZi}AVssa;qF>i^5)N{CqhRK~D=>hu;I<plpZyD)o+Plp@A&pCgtWY}4<WMLBtai$H
+zhJL95+c7&}!>YE<-_p)enHi0N6;^9|*^FL~-@akiG59uDbT&ER&Dy70nXjyLPz;iE
+zwPy+7F%74*GsJ{dkSjSzLM34i^dR}IOqgHRFi1Rn_i2!)&)7j4@#y84$D*0!En{6J
+zbw9dTqY|A6D&kwh)?QhIS8EiThpN`n1Lg7af6OC}`Ws`uD@uuz8$`zaEz#<4QWm=c
+z?c8NBanj7d^8FP!qfjKin(7AM5$L7!liH%?5C4>Wu&A0e?}hy~g)IsMA7TcRhb8^{
+zVY0tR)mSu84HJ<PWe!sWY0?)qn>UDJni0(D7jjDPtdyE?nL&z#<uw;bHy!?HTc|)E
+zIN-@Ox}2|wd~Y&pj@36f%h}5EO@Z3y6`8;#(&ev{B}Z*EOgevIDOlJM4y2y^<LZ5Z
+avVw_e9+%P?>J>_NeFVNqiLR@>TKfgYDQHXp
+
+literal 0
+HcmV?d00001
+
+diff --git a/.sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/screen.scssc b/.sass-cache/d2559a4825e9f4afea6572fff63f60672936bcac/screen.scssc
+new file mode 100644
+index 0000000000000000000000000000000000000000..e3370ec32decca30417efc0e193f5b6085c1e9d8
+GIT binary patch
+literal 3144
+zcmeHJ-*X!^5DpA;wa-qRxD82LN;TJEXacp}BrUB(nS)XW&lKq301tWaD0l1l+Vjas
+zcS%Eszl495UEPoP+!h9&>ldG--PL~Iep+e2chGytZjT^_AdOCejZ!#;9rqxFy@xQ7
+zdvJGu5<IxOC+{8ah43Jh_xFRnK;GM*983<v(EXsH_|=g#hVw%W!1>Qgr9Y|=T71n9
+zrcoSfNRH6xqeY{~YBqz!+PS>tpUOCcBWLKn-+r&Z%YK76P%~huVrV$W;60b^vSGr~
+zX=K<Wih-T0jG3v*;*g!`D76!s&194?lb*+5dhE8+EWll~jH5pagJ?EaIyE~sp8Z~k
+znVBd#!7;Fjieq&~qwf!Yc*-yk{GLUaCWhnW`(+#@FW6MW<dN6UH=F{brf&jdA?XFi
+zcx(n?Bp-SC)aPuj)pKH5B_7id<AP0;{5+PP&*71m!ppR8efwXr-M+(}Cx_hiX_2=Q
+zrDrl0&d~}^;r<XgeAQQTifCS~D1LpB;-N)Hm1y%VKgSK>n8-`y42E78IVNuV8Vsb4
+zXdc?oYkmr|c`Q>H@UCxErUMvjnVf*)+xZ3~JBg*H*(UG!CY3rJ&y}fiC{3Oz6H$Jb
+zL_2Enwy!1=+$>td#32c-i@0JJ#b$H^aZ!Fl@9X|A1~jq>GU<P-f{fH+`T?TpKR09g
+z52i9kC@0W21ft;GAbA7@#aBSqz`a66oadzclmsZ${2R35EQeK2pp?JEEX=t<CK{NN
+zMoAC7!GFlfrqJ;<$awrey|;aXWg1hh#%EF|C`P2WF~U+|N>gd3uU3duvFf+@<q~aP
+z;KA~l%wixVtPvRerlWQ>mB%sk3?2viAlb{%=H2z@QXA9?nc|*aQFYrRl;#}ioXHWM
+z2tXnmSjrj9j<H-vj^a0#jY~U6d~$S2@msI0W1V6sty;NN(Jb<|L|Z<Ifh5pG0J(Zy
+zn{~l6O_{k2V1SIQV(m+nBN5k@H+&qUUK(O&=&hFEDGYgv&jyIbWXE()?Wa|`QQ~7q
+z+(f=Nl;}3aWtD5zLCrei!-dfmu{99eHVcfU#HWPEQQ~%!_H!$a#cpXM?hHilAL4J;
+z;$N%9FH^qmo1!-3+Id~fb+wi&jjoF=zbm%=%g8B`X`&T8|IH=kJkx4U%ISz563ynZ
+z3|^dQl_lYwK*dU1=CHdLM`#r2Xr7i=!BgzZ*nAt}b%S52<8wYrHR>7-hF<d)0N8LY
+z??fRMJDNnGN#2NaZHf9d3!tQ)MmI}1Vi2wH4IjJhd~D8>RKDbm1kR|ry(N%aaa;?8
+zZPT8<*E#jSsd->k3MRMntL*J%DDw6nmo9`)iMs{A?josTkC+qtmY(*l`}UVJBn}E*
+zI!nBCkcsswIT~$MJ0UOPp15BS@g~m;BI=%B<g)iiwaA?+@`Kv3D01)*tMwYj^@&Q-
+zJ7*A`O!Hd@F)ku)9;?_kBH>mr*Oy?fTVQ4RX;i71%D({fO`aDp>z*adu!2eJn-z>Y
+z%pwOLs`VPoR*-4zFU0|=A#8{EvdZEd{RPO4C6F7qdACZ1Mpvt?>LB0bc>%KSS%S=J
+zk=Lupb&y34{%N(IpU2fQSO1`jQ*SC=x}(PB3-HkDbsb-Lf4zI*Exhntx45~PS9^|m
+z!p(2Er3;$9avA=X+c2l*DeRK%AiU@n`P9OJ<BU#MVQB@*S)oSZ{^?q^KFo{N#=Gs`
+J?mMTH#owCebpZeX
+
+literal 0
+HcmV?d00001
+
+diff --git a/.sass-cache/e31681ca07a1ce3225e17868c9d58c2368c1c4c0/_reset.scssc b/.sass-cache/e31681ca07a1ce3225e17868c9d58c2368c1c4c0/_reset.scssc
+new file mode 100644
+index 0000000000000000000000000000000000000000..6b73d59987d54904dac3b8fc7fd85f889bb7246e
+GIT binary patch
+literal 1014
+zcmcJOO^@0z5QaHa0m8=?sMKva6y?+&AORLO*cVGxSK`oZRp@CCkx7PNZHSS_utodl
+z>m<<9p4(eyJRU#u&YSVzW-#l$UqAw(76<4pG#ucA9j$Nu+sSP0tzo+IeLfwJqmdVl
+zrW1b{@|!SP`J>rzIJ93>Bzd#oh=eQ^03qL`)b}!i8fmg{Ba%o#`cRgnds#H!?xf1g
+z>f|*Oc?40g773($3v=g{0tD^uwMc{(fEKYnEvfZTGF>%ncL~?vkv2oQS0Mz7r!h!!
+zUA(c#lLjTrR>>7Z&6N&z5`STwOTJ1p{bgDvHcLbb!XkAh*K6~*Xp#nlG|KPMW|>|I
+zi@p@^Ol8J7cUJCq1cfdFPu+n!Y~2{P=&Jqd*dGnNf!E)SC*vX+%I(gG)DNYC{?Hr_
+zUDU?}a08&xJsrD2KK1}ZM2l9JX4sQ93W)Qu=s`%K-j_5qau?sAB<U5ypA%*wcLo!W
+zX!NQWXk`{Nckcfgv;n*`+A82l@LzggGc;ZZGD8GUT%{t7%>pY6(3Tlz!*TOm%9di*
+zBzM^o@wr4gXT=IPd6K-nG~Q?NL!_BKo2Er!wN{+S6;JxP^ttLb<0{77Ymabzk}AqN
+z*BEBD^GJ(58k{&N!pxM0qC#tu)~mE33#(L&RV>=Nh`O}R8nnZjw97iwo;&^twdee0
+pc8A(F6KR<2Bj{byQ9I{rXTt~QpKF=-%gp&FL1xz91VwZr_z5o`J-`3}
+
+literal 0
+HcmV?d00001
+
+diff --git a/.sass-cache/fad09feeff97d6efe961cfe98a222963a4fcbc3c/_utilities.scssc b/.sass-cache/fad09feeff97d6efe961cfe98a222963a4fcbc3c/_utilities.scssc
+new file mode 100644
+index 0000000000000000000000000000000000000000..0063404c45f426e66a6147164cf246119f3c6b01
+GIT binary patch
+literal 43491
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/app.js b/app.js
+index 95b3e97..92a1b0b 100644
+--- a/app.js
++++ b/app.js
+@@ -3,7 +3,6 @@ var app = angular.module("sunrise-times", []);
+ app.controller('MainCtrl', [
+ 	'$scope',
+ 	function($scope){
+-		$scope.times = [];
+ 		$scope.getTimes = function() {
+ 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
+ 			address = address.toString();
+@@ -21,6 +20,7 @@ app.controller('MainCtrl', [
+ 
+    		//make api call inside of call to google maps api
+    			var i = 0;
++   			var times = [];
+ 	   			while (startDateMilli <= endDateMilli) {
+ 
+ 	   				var currentDate = new Date(startDateMilli);
+@@ -29,15 +29,16 @@ app.controller('MainCtrl', [
+ 											    		url: sunriseurl,
+ 											    		dataType: "JSONP",
+ 											    		success: function(data) {
+-											    			$("#sunrises").append("<div class='sunrise sunrise" + i + "'>" + data.results.sunrise + "</div>");
++											    			$("#sunrises").append("<tr class='day day" + i + "'><td>" + currentDate + "</td><td>" + data.results.sunrise + "</td></tr>");
+ 											    			// $scope.sunrise = data.results.sunrise;
+-											    			$scope.times.push({sunrise: data.results.sunrise});
+-;											    			i += 1;
++											    			times.push("arf");
++										    			i += 1;
+ 											    			return data;
+ 											    		}
+ 														}); //end of api call
+ 			   		console.log(response);
+ 						startDateMilli += 86400000;
++						console.log(times);
+ 			   	} //end of while loop
+   			}
+ 			});
+diff --git a/config.rb b/config.rb
+new file mode 100644
+index 0000000..53e2d41
+--- /dev/null
++++ b/config.rb
+@@ -0,0 +1,25 @@
++require 'compass/import-once/activate'
++# Require any additional compass plugins here.
++
++# Set this to the root of your project when deployed:
++http_path = "/"
++css_dir = "stylesheets"
++sass_dir = "sass"
++images_dir = "images"
++javascripts_dir = "javascripts"
++
++# You can select your preferred output style here (can be overridden via the command line):
++# output_style = :expanded or :nested or :compact or :compressed
++
++# To enable relative paths to assets via compass helper functions. Uncomment:
++# relative_assets = true
++
++# To disable debugging comments that display the original location of your selectors. Uncomment:
++# line_comments = false
++
++
++# If you prefer the indented syntax, you might want to regenerate this
++# project again passing --syntax sass, or you can uncomment this:
++# preferred_syntax = :sass
++# and then run:
++# sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
+diff --git a/index.html b/index.html
+index 352be85..ef2b618 100644
+--- a/index.html
++++ b/index.html
+@@ -8,16 +8,22 @@
+     <script src="js/sorttable.js"></script>
+     <script src="app.js"></script>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
++    <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+   </head>
+   <body ng-app="sunrise-times" ng-controller="MainCtrl">
+     <div class="container">
+-      <div ng-repeat="time in times">
+-        {{time.sunrise}}
+-      </div>
+ 
+       <div class="separator" style="height: 80px;">
+       </div>
+ 
++      <table class="sortable">
++      <thead>
++        <tr><th>Date</th><th>Sunrise</th><th>Sunset</th><th>Day Length</th></tr>
++      </thead>
++      <tbody id="sunrises">
++      </tbody>
++      </table>
++
+       <form ng-submit="getTimes()">
+         <label>Address</label>
+         <input type="text" ng-model="address"></input>
+@@ -32,8 +38,6 @@
+         <input type="date" ng-model="endDate"></input>
+         <button type="submit" class="btn">Get Sunrise Times</button>
+       </form>
+-      <div id="sunrises">
+-      </div>
+ 
+       <a href="http://sunrise-sunset.org/">this is the sunset api</a>
+     </div>
+diff --git a/sass/ie.scss b/sass/ie.scss
+new file mode 100644
+index 0000000..5cd5b6c
+--- /dev/null
++++ b/sass/ie.scss
+@@ -0,0 +1,5 @@
++/* Welcome to Compass. Use this file to write IE specific override styles.
++ * Import this file using the following HTML or equivalent:
++ * <!--[if IE]>
++ *   <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
++ * <![endif]--> */
+diff --git a/sass/print.scss b/sass/print.scss
+new file mode 100644
+index 0000000..b0e9e45
+--- /dev/null
++++ b/sass/print.scss
+@@ -0,0 +1,3 @@
++/* Welcome to Compass. Use this file to define print styles.
++ * Import this file using the following HTML or equivalent:
++ * <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" /> */
+diff --git a/sass/screen.scss b/sass/screen.scss
+new file mode 100644
+index 0000000..53de1fa
+--- /dev/null
++++ b/sass/screen.scss
+@@ -0,0 +1,13 @@
++/* Welcome to Compass.
++ * In this file you should write your main styles. (or centralize your imports)
++ * Import this file using the following HTML or equivalent:
++ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
++
++@import "compass/reset";
++
++table.sortable thead {
++    background-color:#eee;
++    color:#666666;
++    font-weight: bold;
++    cursor: default;
++}
+diff --git a/stylesheets/ie.css b/stylesheets/ie.css
+new file mode 100644
+index 0000000..5cd5b6c
+--- /dev/null
++++ b/stylesheets/ie.css
+@@ -0,0 +1,5 @@
++/* Welcome to Compass. Use this file to write IE specific override styles.
++ * Import this file using the following HTML or equivalent:
++ * <!--[if IE]>
++ *   <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
++ * <![endif]--> */
+diff --git a/stylesheets/print.css b/stylesheets/print.css
+new file mode 100644
+index 0000000..b0e9e45
+--- /dev/null
++++ b/stylesheets/print.css
+@@ -0,0 +1,3 @@
++/* Welcome to Compass. Use this file to define print styles.
++ * Import this file using the following HTML or equivalent:
++ * <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" /> */
+diff --git a/stylesheets/screen.css b/stylesheets/screen.css
+new file mode 100644
+index 0000000..68aefcd
+--- /dev/null
++++ b/stylesheets/screen.css
+@@ -0,0 +1,76 @@
++/* Welcome to Compass.
++ * In this file you should write your main styles. (or centralize your imports)
++ * Import this file using the following HTML or equivalent:
++ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
++/* line 5, ../../../../.rvm/gems/ruby-2.0.0-p353/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
++html, body, div, span, applet, object, iframe,
++h1, h2, h3, h4, h5, h6, p, blockquote, pre,
++a, abbr, acronym, address, big, cite, code,
++del, dfn, em, img, ins, kbd, q, s, samp,
++small, strike, strong, sub, sup, tt, var,
++b, u, i, center,
++dl, dt, dd, ol, ul, li,
++fieldset, form, label, legend,
++table, caption, tbody, tfoot, thead, tr, th, td,
++article, aside, canvas, details, embed,
++figure, figcaption, footer, header, hgroup,
++menu, nav, output, ruby, section, summary,
++time, mark, audio, video {
++  margin: 0;
++  padding: 0;
++  border: 0;
++  font: inherit;
++  font-size: 100%;
++  vertical-align: baseline;
++}
++
++/* line 22, ../../../../.rvm/gems/ruby-2.0.0-p353/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
++html {
++  line-height: 1;
++}
++
++/* line 24, ../../../../.rvm/gems/ruby-2.0.0-p353/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
++ol, ul {
++  list-style: none;
++}
++
++/* line 26, ../../../../.rvm/gems/ruby-2.0.0-p353/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
++table {
++  border-collapse: collapse;
++  border-spacing: 0;
++}
++
++/* line 28, ../../../../.rvm/gems/ruby-2.0.0-p353/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
++caption, th, td {
++  text-align: left;
++  font-weight: normal;
++  vertical-align: middle;
++}
++
++/* line 30, ../../../../.rvm/gems/ruby-2.0.0-p353/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
++q, blockquote {
++  quotes: none;
++}
++/* line 103, ../../../../.rvm/gems/ruby-2.0.0-p353/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
++q:before, q:after, blockquote:before, blockquote:after {
++  content: "";
++  content: none;
++}
++
++/* line 32, ../../../../.rvm/gems/ruby-2.0.0-p353/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
++a img {
++  border: none;
++}
++
++/* line 116, ../../../../.rvm/gems/ruby-2.0.0-p353/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
++article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
++  display: block;
++}
++
++/* line 8, ../sass/screen.scss */
++table.sortable thead {
++  background-color: #eee;
++  color: #666666;
++  font-weight: bold;
++  cursor: default;
++}
+-- 
+2.1.3.36.g8e36a6d
+

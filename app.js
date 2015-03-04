@@ -77,10 +77,6 @@ app.controller('MainCtrl', [
 															}
 														}); //end of api call
 						startDateMilli += 86400000;
-
-						for (var i = 0; i <= moment.tz.names().length; i++) {
-							
-						}
 			   	} //end of while loop
   			}
 			}); //endof geocoder
@@ -94,6 +90,10 @@ app.controller('MainCtrl', [
 		var oneWeekAgo = new Date();
 		$scope.startDate = oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 		$scope.endDate = moment(new Date).format();
+		$("#zone").append("<option value='current'>My Current Time Zone</option>");
+		for (var i = 0; i <= moment.tz.names().length; i++) {
+			$("#zone").append("<option value='" + moment.tz.names()[i] + "'>"+ moment.tz.names()[i].split("_").join(" ") + "</option>");
+		}
 	}
 
 	init();

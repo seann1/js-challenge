@@ -18,6 +18,15 @@ app.controller('MainCtrl', [
   	}
 
 		$scope.getTimes = function() {
+
+			function init() {
+				var oneWeekAgo = new Date();
+				$scope.startDate = oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+				$scope.endDate = moment(new Date).format();
+			}
+
+			init();
+			$("#sunrises").empty();
 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
 			address = address.toString();
 
@@ -75,13 +84,13 @@ app.controller('MainCtrl', [
 		$scope.address = '';
 		$scope.city = '';
 		$scope.state = '';
-		$scope.startDate = '';
-		$scope.endDate = '';
 	}; //end of getTimes();
+
 	function init() {
 		var oneWeekAgo = new Date();
 		$scope.startDate = oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 		$scope.endDate = moment(new Date).format();
 	}
+
 	init();
 }]);

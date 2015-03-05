@@ -89,3 +89,11 @@ td {
   padding: 5px;
   margin: 5px;
 }
+
+/* line 31, ../sass/screen.scss */
+.deethree {
+  background-color: aaaaaa;
+  position: absolute;
+  height: 340px;
+  width: 100%;
+}

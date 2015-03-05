@@ -92,7 +92,7 @@ app.controller('MainCtrl', [
 		$scope.endDate = moment(new Date).format();
 		$("#zone").append("<option value='current'>My Current Time Zone</option>");
 		for (var i = 0; i < moment.tz.names().length; i++) {
-			$("#zone").append("<option value='" + moment.tz.names()[i] + "'>"+ moment.tz.names()[i] + "</option>"); //.split("_").join(" ")
+			$("#zone").append("<option value='" + moment.tz.names()[i] + "'>"+ moment.tz.names()[i].split("_").join(" ") + "</option>");
 		}
 	}
 

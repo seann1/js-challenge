@@ -40,16 +40,7 @@ app.controller('MainCtrl', [
   			if (status == google.maps.GeocoderStatus.OK)
   			{
    			  var i = 0;
-   			  var timesObject = { 'sunrise': '',
-   														'sunset': '',
-   														'dayLength': '',
-   														'astroTwilightBegin': '',
-   														'astroTwilightEnd': '',
-   														'civilTwilightBegin': '',
-   														'civilTwilightEnd': '',
-   														'nauticalTwilightBegin': '',
-   														'nauticalTwilightEnd': '',
-   														'solarNoon': ''};
+   			  var timesArray = [];
 	   			while (startDateMilli <= endDateMilli) {
 
 	   				var currentDate = new Date(startDateMilli);
@@ -76,16 +67,32 @@ app.controller('MainCtrl', [
 												    				}
 												    			}
 
+												    			var timesObject = {
+												    				'sunrise': '',
+												    				'sunset': '',
+												    				'dayLength': '',
+												    				'astroTwilightBegin': '',
+												    				'astroTwilightEnd': '',
+												    				'civilTwilightBegin': '',
+												    				'civilTwilightEnd': '',
+												    				'nauticalTwilightBegin': '',
+												    				'nauticalTwilightEnd': '',
+												    				'solarNoon': ''
+																	}
+
+
 												    			timesObject.sunrise = toTimeZone(data.results.sunrise);
-												    			timesObject.sunset = toTimeZone(data.results.sunset);
-												    			timesObject.dayLength = data.results.day_length;
-												    			timesObject.astroTwilightBegin = toTimeZone(data.results.astronomical_twilight_begin);
-												    			timesObject.astroTwilightEnd = toTimeZone(data.results.astronomical_twilight_end);
-												    			timesObject.civilTwilightBegin = toTimeZone(data.results.civil_twilight_begin);
-												    			timesObject.civilTwilightEnd = toTimeZone(data.results.civil_twilight_end);
-												    			timesObject.nauticalTwilightBegin = toTimeZone(data.results.nautical_twilight_begin);
-												    			timesObject.nauticalTwilightEnd = toTimeZone(data.results.nautical_twilight_end);
-												    			timesObject.solarNoon = toTimeZone(data.results.solar_noon);
+				   												timesObject.sunset = toTimeZone(data.results.sunset);
+				   												timesObject.dayLength = data.results.day_length;
+				   												timesObject.astroTwilightBegin = toTimeZone(data.results.astronomical_twilight_begin);
+				   												timesObject.astroTwilightEnd = toTimeZone(data.results.astronomical_twilight_end);
+				   												timesObject.civilTwilightBegin = toTimeZone(data.results.civil_twilight_begin);
+				   												timesObject.civilTwilightEnd = toTimeZone(data.results.civil_twilight_end);
+				   												timesObject.nauticalTwilightBegin = toTimeZone(data.results.nautical_twilight_begin);
+				   												timesObject.nauticalTwilightEnd = toTimeZone(data.results.nautical_twilight_end);
+				   												timesObject.solarNoon = toTimeZone(data.results.solar_noon);
+
+				   												timesArray.push(timesObject);
 
 
 												    		$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + toTimeZone(data.results.sunrise) + "</td><td>" + toTimeZone(data.results.sunset) + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default' data-toggle='modal' data-target='#modal" + i + "'>More Info</button></td></tr>");
@@ -97,7 +104,7 @@ app.controller('MainCtrl', [
 															for (var i = 0; i <= dates.length; i++){
 																$(".date" + i).text(dates[i]);
 															}
-															console.log(timesObject);
+															console.log(timesArray);
 														}); //end of api call
 						startDateMilli += 86400000;
 			   	} //end of while loop

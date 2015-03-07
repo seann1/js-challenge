@@ -81,17 +81,28 @@ app.controller('MainCtrl', [
 												    				'solarNoon': ''
 																	}
 
+																	function getSeconds(time) {
+																		time = time.split(":");
+																		var seconds = time[2].split(" ")[0];
+																		var ampm = time[2].split(" ")[1];
+																		var timeInSeconds = (time[0]*60*60) + (time[1]*60) + (seconds);
+																		if (ampm === "pm") {
+																			timeInSeconds += 43200;
+																		}
+																		return timeInSeconds;
+																	}
 
-												    			timesObject.sunrise = toTimeZone(data.results.sunrise);
-				   												timesObject.sunset = toTimeZone(data.results.sunset);
-				   												timesObject.dayLength = data.results.day_length;
-				   												timesObject.astroTwilightBegin = toTimeZone(data.results.astronomical_twilight_begin);
-				   												timesObject.astroTwilightEnd = toTimeZone(data.results.astronomical_twilight_end);
-				   												timesObject.civilTwilightBegin = toTimeZone(data.results.civil_twilight_begin);
-				   												timesObject.civilTwilightEnd = toTimeZone(data.results.civil_twilight_end);
-				   												timesObject.nauticalTwilightBegin = toTimeZone(data.results.nautical_twilight_begin);
-				   												timesObject.nauticalTwilightEnd = toTimeZone(data.results.nautical_twilight_end);
-				   												timesObject.solarNoon = toTimeZone(data.results.solar_noon);
+
+												    			timesObject.sunrise = getSeconds(toTimeZone(data.results.sunrise));
+				   												timesObject.sunset = getSeconds(toTimeZone(data.results.sunset));
+				   												timesObject.dayLength = getSeconds(data.results.day_length);
+				   												timesObject.astroTwilightBegin = getSeconds(toTimeZone(data.results.astronomical_twilight_begin));
+				   												timesObject.astroTwilightEnd = getSeconds(toTimeZone(data.results.astronomical_twilight_end));
+				   												timesObject.civilTwilightBegin = getSeconds(toTimeZone(data.results.civil_twilight_begin));
+				   												timesObject.civilTwilightEnd = getSeconds(toTimeZone(data.results.civil_twilight_end));
+				   												timesObject.nauticalTwilightBegin = getSeconds(toTimeZone(data.results.nautical_twilight_begin));
+				   												timesObject.nauticalTwilightEnd = getSeconds(toTimeZone(data.results.nautical_twilight_end));
+				   												timesObject.solarNoon = getSeconds(toTimeZone(data.results.solar_noon));
 
 				   												timesArray.push(timesObject);
 

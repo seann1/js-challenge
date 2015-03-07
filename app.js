@@ -76,7 +76,17 @@ app.controller('MainCtrl', [
 												    				}
 												    			}
 
-												    			timesArray.push(data.results)
+												    			timesObject.sunrise = toTimeZone(data.results.sunrise);
+												    			timesObject.sunset = toTimeZone(data.results.sunset);
+												    			timesObject.dayLength = data.results.day_length;
+												    			timesObject.astroTwilightBegin = toTimeZone(data.results.astronomical_twilight_begin);
+												    			timesObject.astroTwilightEnd = toTimeZone(data.results.astronomical_twilight_end);
+												    			timesObject.civilTwilightBegin = toTimeZone(data.results.civil_twilight_begin);
+												    			timesObject.civilTwilightEnd = toTimeZone(data.results.civil_twilight_end);
+												    			timesObject.nauticalTwilightBegin = toTimeZone(data.results.nautical_twilight_begin);
+												    			timesObject.nauticalTwilightEnd = toTimeZone(data.results.nautical_twilight_end);
+												    			timesObject.solarNoon = toTimeZone(data.results.solar_noon);
+
 
 												    		$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + toTimeZone(data.results.sunrise) + "</td><td>" + toTimeZone(data.results.sunset) + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default' data-toggle='modal' data-target='#modal" + i + "'>More Info</button></td></tr>");
 											    			$(".modals").append('<div class="modal fade" id="modal' + i + '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">' + splitDate + '</h4></div><div class="modal-body">' + '<div class="modal-details">Astronomical twilight Begins: ' + toTimeZone(data.results.astronomical_twilight_begin) + '</div>' + '<div class="modal-details">Astronomical Twilight Ends: ' + toTimeZone(data.results.astronomical_twilight_end) + '</div><div class="modal-details">Civil Twilight Begins: ' + toTimeZone(data.results.civil_twilight_begin) + '</div><div class="modal-details">Civil Twilight Ends: ' + toTimeZone(data.results.civil_twilight_end) + '</div>' + '<div class="modal-details">Nautical Twilight Begins: ' + toTimeZone(data.results.nautical_twilight_begin) + '</div><div class="modal-details">Nautical Twilight Ends: ' + toTimeZone(data.results.nautical_twilight_end) + '</div><div class="modal-details">Solar Noon: ' + toTimeZone(data.results.solar_noon) + '</div><div class="modal-footer"></div></div></div></div>');
@@ -87,7 +97,7 @@ app.controller('MainCtrl', [
 															for (var i = 0; i <= dates.length; i++){
 																$(".date" + i).text(dates[i]);
 															}
-															console.log(timesArray);
+															console.log(timesObject);
 														}); //end of api call
 						startDateMilli += 86400000;
 			   	} //end of while loop

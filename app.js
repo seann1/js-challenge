@@ -125,10 +125,13 @@ app.controller('MainCtrl', [
 											for (var i = 0; i < timesArray.length; i++) {
 												timesArray[i].date = dates[i];
 											}
-											console.log(timesArray);
-											console.log();
 
-										if (dates.length === moment($scope.endDate, "MM-DD-YYYY")) {
+											var startDateMidnight = new Date($scope.startDate).setHours(00, 00, 00, 00) / 86400000;
+											var endDateMidnight = new Date($scope.endDate).setHours(00, 00, 00, 00) / 86400000;
+											console.log(timesArray.length);
+
+										if (timesArray.length === (endDateMidnight - startDateMidnight)) {
+											alert("hi");
 											var w = 500;
 											var h = 300;
 											var barPadding = 1;

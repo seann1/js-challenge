@@ -82,7 +82,7 @@ app.controller('MainCtrl', [
 																	}
 
 
-												    			timesObject.sunrise = moment(toTimeZone(data.results.sunrise));
+												    			timesObject.sunrise = toTimeZone(data.results.sunrise);
 				   												timesObject.sunset = toTimeZone(data.results.sunset);
 				   												timesObject.dayLength = data.results.day_length;
 				   												timesObject.astroTwilightBegin = toTimeZone(data.results.astronomical_twilight_begin);

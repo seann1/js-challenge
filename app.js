@@ -3,6 +3,8 @@ var app = angular.module("sunrise-times", ['ui.bootstrap']);
 app.controller('MainCtrl', [
 	'$scope',
 	function($scope){
+		var kittens = 'hello';
+		var bigKittens = 'hello2';
 
   	$scope.open = function($event, opened) {
 	    $event.preventDefault();
@@ -126,29 +128,29 @@ app.controller('MainCtrl', [
 											console.log(timesArray);
 											console.log();
 
-										// if (dates.length === moment($scope.endDate, "MM-DD-YYYY"))
-											// var w = 500;
-											// var h = 300;
-											// var barPadding = 1;
-											// 	var svg = d3.select(".deethree")
-											//    			.append("svg")
-								   //                      .attr("width", w + "px")
-								   //                      .attr("height", h + "px");
-								   //          svg.selectAll("rect")
-					      //              		.data(timesArray)
-					      //              		.enter()
-					      //              		.append("rect")
-					      //              		.attr("x", function(d, i) {
-					      //                   return i * (w / timesArray.length);
-					      //               	})
-					      //              		.attr("y", function(d) {
-					      //                   return h - d[0].sunrise;  //Height minus data value
-					      //               	})
-					      //              		.attr("width", w / timesArray.length - barPadding)
-					      //              		.attr("height", function(d) {
-					      //                   return d[0].sunrise * 4;
-					      //               	});
-
+										if (dates.length === moment($scope.endDate, "MM-DD-YYYY")) {
+											var w = 500;
+											var h = 300;
+											var barPadding = 1;
+												var svg = d3.select(".deethree")
+											   			.append("svg")
+								                        .attr("width", w + "px")
+								                        .attr("height", h + "px");
+								            svg.selectAll("rect")
+					                   		.data(timesArray)
+					                   		.enter()
+					                   		.append("rect")
+					                   		.attr("x", function(d, i) {
+					                        return i * (w / timesArray.length);
+					                    	})
+					                   		.attr("y", function(d) {
+					                        return h - d[0].sunrise;  //Height minus data value
+					                    	})
+					                   		.attr("width", w / timesArray.length - barPadding)
+					                   		.attr("height", function(d) {
+					                        return d[0].sunrise * 4;
+					                    	});
+					          }
 
 														}); //end of api call
 						startDateMilli += 86400000;

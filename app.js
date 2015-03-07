@@ -107,38 +107,35 @@ app.controller('MainCtrl', [
 															}
 
 															for (var i = 0; i < timesArray.length; i++) {
-																var object = timesArray[i];
-																object.date = dates[i];
-																console.log(object);
+																timesArray[i].date = dates[i];
 															}
+
+															var w = 100;
+            									var h = 340;
+            									var barPadding = 1;
+			   											var svg = d3.select(".deethree")
+												   								.append("svg")
+									                        .attr("width", w + "%")
+									                        .attr("height", h + "px");
+									            svg.selectAll("rect")
+						                   .data(timesArray)
+						                   .enter()
+						                   .append("rect")
+						                   .attr("x", function(d, i) {
+						                        return i * (w / timesArray.length);
+						                    })
+						                   .attr("y", function(d) {
+						                        return h - d.sunrise;  //Height minus data value
+						                    })
+						                   .attr("width", w / timesArray.length - barPadding)
+						                   .attr("height", function(d) {
+						                        return d.sunrise * 4;
+						                    });
+
+
 														}); //end of api call
 						startDateMilli += 86400000;
 			   	} //end of while loop
-			   	var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
-                11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
-
-			   		var w = 100;
-            var h = 340;
-            var barPadding = 1;
-			   		var svg = d3.select(".deethree")
-			   								.append("svg")
-                        .attr("width", w + "%")
-                        .attr("height", h + "px");
-
-            svg.selectAll("rect")
-                   .data(dataset)
-                   .enter()
-                   .append("rect")
-                   .attr("x", function(d, i) {
-                        return i * (w / dataset.length);
-                    })
-                   .attr("y", function(d) {
-                        return h - d;  //Height minus data value
-                    })
-                   .attr("width", w / dataset.length - barPadding)
-                   .attr("height", function(d) {
-                        return d * 4;
-  			});
 
 			} //end of if statement
 		}); //end of geocoder

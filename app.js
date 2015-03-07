@@ -138,11 +138,11 @@ app.controller('MainCtrl', [
 		                        return i * (w / timesArray.length);
 		                    	})
 		                   		.attr("y", function(d) {
-		                        return h - d[-1].sunrise;  //Height minus data value
+		                        return h - d[0].sunrise;  //Height minus data value
 		                    	})
 		                   		.attr("width", w / timesArray.length - barPadding)
 		                   		.attr("height", function(d) {
-		                        return d[-1].sunrise * 4;
+		                        return d[0].sunrise * 4;
 		                    	});
 
 

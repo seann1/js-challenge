@@ -82,7 +82,7 @@ app.controller('MainCtrl', [
 																	}
 
 
-												    			timesObject.sunrise = toTimeZone(data.results.sunrise);
+												    			timesObject.sunrise = moment(toTimeZone(data.results.sunrise));
 				   												timesObject.sunset = toTimeZone(data.results.sunset);
 				   												timesObject.dayLength = data.results.day_length;
 				   												timesObject.astroTwilightBegin = toTimeZone(data.results.astronomical_twilight_begin);
@@ -109,28 +109,29 @@ app.controller('MainCtrl', [
 															for (var i = 0; i < timesArray.length; i++) {
 																timesArray[i].date = dates[i];
 															}
+															console.log(timesArray);
 
-															var w = 100;
-            									var h = 340;
-            									var barPadding = 1;
-			   											var svg = d3.select(".deethree")
-												   								.append("svg")
-									                        .attr("width", w + "%")
-									                        .attr("height", h + "px");
-									            svg.selectAll("rect")
-						                   .data(timesArray)
-						                   .enter()
-						                   .append("rect")
-						                   .attr("x", function(d, i) {
-						                        return i * (w / timesArray.length);
-						                    })
-						                   .attr("y", function(d) {
-						                        return h - d.sunrise;  //Height minus data value
-						                    })
-						                   .attr("width", w / timesArray.length - barPadding)
-						                   .attr("height", function(d) {
-						                        return d.sunrise * 4;
-						                    });
+															// var w = 100;
+            			// 						var h = 340;
+            			// 						var barPadding = 1;
+			   									// 		var svg = d3.select(".deethree")
+												   // 								.append("svg")
+									      //                   .attr("width", w + "%")
+									      //                   .attr("height", h + "px");
+									      //       svg.selectAll("rect")
+						         //           .data(timesArray)
+						         //           .enter()
+						         //           .append("rect")
+						         //           .attr("x", function(d, i) {
+						         //                return i * (w / timesArray.length);
+						         //            })
+						         //           .attr("y", function(d) {
+						         //                return h - d.sunrise;  //Height minus data value
+						         //            })
+						         //           .attr("width", w / timesArray.length - barPadding)
+						         //           .attr("height", function(d) {
+						         //                return d.sunrise * 4;
+						         //            });
 
 
 														}); //end of api call

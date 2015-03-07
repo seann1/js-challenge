@@ -3,8 +3,6 @@ var app = angular.module("sunrise-times", ['ui.bootstrap']);
 app.controller('MainCtrl', [
 	'$scope',
 	function($scope){
-		var kittens = 'hello';
-		var bigKittens = 'hello2';
 
   	$scope.open = function($event, opened) {
 	    $event.preventDefault();
@@ -21,13 +19,13 @@ app.controller('MainCtrl', [
 
 		$scope.getTimes = function() {
 
-			function init() {
-				var oneWeekAgo = new Date();
-				$scope.startDate = oneWeekAgo.setDate(oneWeekAgo.getDate() - 6);
-				$scope.endDate = moment(new Date).format();
-			}
+			// function init() {
+			// 	var oneWeekAgo = new Date();
+			// 	$scope.startDate = oneWeekAgo.setDate(oneWeekAgo.getDate() - 6);
+			// 	$scope.endDate = moment(new Date).format();
+			// }
 
-			init();
+			// init();
 
 			$("#sunrises").empty();
 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
@@ -45,7 +43,8 @@ app.controller('MainCtrl', [
   			{
    			  var i = 0;
    			  var timesArray = [];
-	   			while (startDateMilli <= (endDateMilli + 86400000)) {
+	   			// while (startDateMilli <= (endDateMilli + 86400000)) {
+	   			while (startDateMilli <= (endDateMilli)) {
 
 	   				var currentDate = new Date(startDateMilli);
 	   				var splitDate = moment(currentDate).format("M-D-YYYY");
@@ -131,7 +130,6 @@ app.controller('MainCtrl', [
 											console.log(timesArray.length);
 
 										if (timesArray.length === (endDateMidnight - startDateMidnight)) {
-											alert("hi");
 											var w = 500;
 											var h = 300;
 											var barPadding = 1;
@@ -169,7 +167,7 @@ app.controller('MainCtrl', [
 
 	function init() {
 		var oneWeekAgo = new Date();
-		$scope.startDate = oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+		$scope.startDate = oneWeekAgo.setDate(oneWeekAgo.getDate() - 6);
 		$scope.endDate = moment(new Date).format();
 		$("#zone").append("<option value='current'>My Current Time Zone</option>");
 		for (var i = 0; i < moment.tz.names().length; i++) {

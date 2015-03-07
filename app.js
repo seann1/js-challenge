@@ -68,6 +68,7 @@ app.controller('MainCtrl', [
 												    			}
 
 												    			var timesObject = {
+												    				'date': '',
 												    				'sunrise': '',
 												    				'sunset': '',
 												    				'dayLength': '',
@@ -104,7 +105,12 @@ app.controller('MainCtrl', [
 															for (var i = 0; i <= dates.length; i++){
 																$(".date" + i).text(dates[i]);
 															}
-															console.log(timesArray);
+
+															for (var i = 0; i < timesArray.length; i++) {
+																var object = timesArray[i];
+																object.date = dates[i];
+																console.log(object);
+															}
 														}); //end of api call
 						startDateMilli += 86400000;
 			   	} //end of while loop

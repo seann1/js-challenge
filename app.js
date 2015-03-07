@@ -40,6 +40,16 @@ app.controller('MainCtrl', [
   			if (status == google.maps.GeocoderStatus.OK)
   			{
    			  var i = 0;
+   			  var timesObject = { 'sunrise': '',
+   														'sunset': '',
+   														'dayLength': '',
+   														'astroTwilightBegin': '',
+   														'astroTwilightEnd': '',
+   														'civilTwilightBegin': '',
+   														'civilTwilightEnd': '',
+   														'nauticalTwilightBegin': '',
+   														'nauticalTwilightEnd': '',
+   														'solarNoon': ''};
 	   			while (startDateMilli <= endDateMilli) {
 
 	   				var currentDate = new Date(startDateMilli);
@@ -66,6 +76,8 @@ app.controller('MainCtrl', [
 												    				}
 												    			}
 
+												    			timesArray.push(data.results)
+
 												    		$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + toTimeZone(data.results.sunrise) + "</td><td>" + toTimeZone(data.results.sunset) + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default' data-toggle='modal' data-target='#modal" + i + "'>More Info</button></td></tr>");
 											    			$(".modals").append('<div class="modal fade" id="modal' + i + '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">' + splitDate + '</h4></div><div class="modal-body">' + '<div class="modal-details">Astronomical twilight Begins: ' + toTimeZone(data.results.astronomical_twilight_begin) + '</div>' + '<div class="modal-details">Astronomical Twilight Ends: ' + toTimeZone(data.results.astronomical_twilight_end) + '</div><div class="modal-details">Civil Twilight Begins: ' + toTimeZone(data.results.civil_twilight_begin) + '</div><div class="modal-details">Civil Twilight Ends: ' + toTimeZone(data.results.civil_twilight_end) + '</div>' + '<div class="modal-details">Nautical Twilight Begins: ' + toTimeZone(data.results.nautical_twilight_begin) + '</div><div class="modal-details">Nautical Twilight Ends: ' + toTimeZone(data.results.nautical_twilight_end) + '</div><div class="modal-details">Solar Noon: ' + toTimeZone(data.results.solar_noon) + '</div><div class="modal-footer"></div></div></div></div>');
 										    			  i += 1;
@@ -75,11 +87,38 @@ app.controller('MainCtrl', [
 															for (var i = 0; i <= dates.length; i++){
 																$(".date" + i).text(dates[i]);
 															}
+															console.log(timesArray);
 														}); //end of api call
 						startDateMilli += 86400000;
 			   	} //end of while loop
-  			}
-			}); //endof geocoder
+			   	var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+                11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
+
+			   		var w = 100;
+            var h = 340;
+            var barPadding = 1;
+			   		var svg = d3.select(".deethree")
+			   								.append("svg")
+                        .attr("width", w + "%")
+                        .attr("height", h + "px");
+
+            svg.selectAll("rect")
+                   .data(dataset)
+                   .enter()
+                   .append("rect")
+                   .attr("x", function(d, i) {
+                        return i * (w / dataset.length);
+                    })
+                   .attr("y", function(d) {
+                        return h - d;  //Height minus data value
+                    })
+                   .attr("width", w / dataset.length - barPadding)
+                   .attr("height", function(d) {
+                        return d * 4;
+  			});
+
+			} //end of if statement
+		}); //end of geocoder
 
 		$scope.address = '';
 		$scope.city = '';

@@ -92,8 +92,12 @@ td {
 
 /* line 31, ../sass/screen.scss */
 .deethree {
-  background-color: aaaaaa;
   position: absolute;
   height: 340px;
   width: 100%;
+}
+
+/* line 41, ../sass/screen.scss */
+.background {
+  fill: red;
 }

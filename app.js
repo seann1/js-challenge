@@ -21,11 +21,12 @@ app.controller('MainCtrl', [
 
 			function init() {
 				var oneWeekAgo = new Date();
-				$scope.startDate = oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+				$scope.startDate = oneWeekAgo.setDate(oneWeekAgo.getDate() - 6);
 				$scope.endDate = moment(new Date).format();
 			}
 
 			init();
+
 			$("#sunrises").empty();
 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
 			address = address.toString();
@@ -33,6 +34,7 @@ app.controller('MainCtrl', [
 			var startDate = $scope.startDate;
 			var startDateMilli = new Date($scope.startDate).getTime();
 			var endDateMilli = new Date($scope.endDate).getTime();
+
 			var dates = [];
 
 			var geocoder = new google.maps.Geocoder();
@@ -41,7 +43,7 @@ app.controller('MainCtrl', [
   			{
    			  var i = 0;
    			  var timesArray = [];
-	   			while (startDateMilli <= endDateMilli) {
+	   			while (startDateMilli <= (endDateMilli + 86400000)) {
 
 	   				var currentDate = new Date(startDateMilli);
 	   				var splitDate = moment(currentDate).format("M-D-YYYY");
@@ -122,28 +124,30 @@ app.controller('MainCtrl', [
 												timesArray[i].date = dates[i];
 											}
 											console.log(timesArray);
+											console.log();
 
-								var w = 500;
-								var h = 300;
-								var barPadding = 1;
-									var svg = d3.select(".deethree")
-								   			.append("svg")
-					                        .attr("width", w + "px")
-					                        .attr("height", h + "px");
-					            svg.selectAll("rect")
-		                   		.data(timesArray)
-		                   		.enter()
-		                   		.append("rect")
-		                   		.attr("x", function(d, i) {
-		                        return i * (w / timesArray.length);
-		                    	})
-		                   		.attr("y", function(d) {
-		                        return h - d[0].sunrise;  //Height minus data value
-		                    	})
-		                   		.attr("width", w / timesArray.length - barPadding)
-		                   		.attr("height", function(d) {
-		                        return d[0].sunrise * 4;
-		                    	});
+										// if (dates.length === moment($scope.endDate, "MM-DD-YYYY"))
+											// var w = 500;
+											// var h = 300;
+											// var barPadding = 1;
+											// 	var svg = d3.select(".deethree")
+											//    			.append("svg")
+								   //                      .attr("width", w + "px")
+								   //                      .attr("height", h + "px");
+								   //          svg.selectAll("rect")
+					      //              		.data(timesArray)
+					      //              		.enter()
+					      //              		.append("rect")
+					      //              		.attr("x", function(d, i) {
+					      //                   return i * (w / timesArray.length);
+					      //               	})
+					      //              		.attr("y", function(d) {
+					      //                   return h - d[0].sunrise;  //Height minus data value
+					      //               	})
+					      //              		.attr("width", w / timesArray.length - barPadding)
+					      //              		.attr("height", function(d) {
+					      //                   return d[0].sunrise * 4;
+					      //               	});
 
 
 														}); //end of api call
@@ -151,8 +155,8 @@ app.controller('MainCtrl', [
 			   	} //end of while loop
 
 			} //end of if statement
-		}); //end of geocoder
 
+		}); //end of geocoder
 		$scope.address = '';
 		$scope.city = '';
 		$scope.state = '';

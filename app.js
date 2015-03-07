@@ -52,97 +52,98 @@ app.controller('MainCtrl', [
 	   				var longitude = results[0].geometry.location.lng();
 	 					var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + latitude + "&lng=" + longitude + "&date=" + splitDashDate + "&callback=mycallback";
 			   		var response = $.ajax({
-											    		url: sunriseurl,
-											    		dataType: "JSONP",
-											    		success: function(data) {
-												    			function toTimeZone(time) {
-												    				if ($("#zone").val().toString() === "current") {
-												    					var date = new Date(dashDate + " " + time + " UTC");
-												    					return moment(date).format("h:mm:ss a");
-												    				} else {
-												    					var timezone = $("#zone").val();
-													    				var sunrise = moment.tz(splitDashDate + " " + time, "UTC");
-													    				return sunrise.tz(timezone).format("h:mm:ss a");
-													    				console.log(timezone);
-												    				}
-												    			}
+							    		url: sunriseurl,
+							    		dataType: "JSONP",
+							    		success: function(data) {
+								    			function toTimeZone(time) {
+								    				if ($("#zone").val().toString() === "current") {
+								    					var date = new Date(dashDate + " " + time + " UTC");
+								    					return moment(date).format("h:mm:ss a");
+								    				} else {
+								    					var timezone = $("#zone").val();
+									    				var sunrise = moment.tz(splitDashDate + " " + time, "UTC");
+									    				return sunrise.tz(timezone).format("h:mm:ss a");
+									    				console.log(timezone);
+								    				}
+								    			}
 
-												    			var timesObject = {
-												    				'date': '',
-												    				'sunrise': '',
-												    				'sunset': '',
-												    				'dayLength': '',
-												    				'astroTwilightBegin': '',
-												    				'astroTwilightEnd': '',
-												    				'civilTwilightBegin': '',
-												    				'civilTwilightEnd': '',
-												    				'nauticalTwilightBegin': '',
-												    				'nauticalTwilightEnd': '',
-												    				'solarNoon': ''
-																	}
+								    			var timesObject = {
+								    				'date': '',
+								    				'sunrise': '',
+								    				'sunset': '',
+								    				'dayLength': '',
+								    				'astroTwilightBegin': '',
+								    				'astroTwilightEnd': '',
+								    				'civilTwilightBegin': '',
+								    				'civilTwilightEnd': '',
+								    				'nauticalTwilightBegin': '',
+								    				'nauticalTwilightEnd': '',
+								    				'solarNoon': ''
+													}
 
-																	function getSeconds(time) {
-																		time = time.split(":");
-																		var seconds = time[2].split(" ")[0];
-																		var ampm = time[2].split(" ")[1];
-																		var timeInSeconds = (time[0]*60*60) + (time[1]*60) + (seconds);
-																		if (ampm === "pm") {
-																			timeInSeconds += 43200;
-																		}
-																		return timeInSeconds;
-																	}
-
-
-												    			timesObject.sunrise = getSeconds(toTimeZone(data.results.sunrise));
-				   												timesObject.sunset = getSeconds(toTimeZone(data.results.sunset));
-				   												timesObject.dayLength = getSeconds(data.results.day_length);
-				   												timesObject.astroTwilightBegin = getSeconds(toTimeZone(data.results.astronomical_twilight_begin));
-				   												timesObject.astroTwilightEnd = getSeconds(toTimeZone(data.results.astronomical_twilight_end));
-				   												timesObject.civilTwilightBegin = getSeconds(toTimeZone(data.results.civil_twilight_begin));
-				   												timesObject.civilTwilightEnd = getSeconds(toTimeZone(data.results.civil_twilight_end));
-				   												timesObject.nauticalTwilightBegin = getSeconds(toTimeZone(data.results.nautical_twilight_begin));
-				   												timesObject.nauticalTwilightEnd = getSeconds(toTimeZone(data.results.nautical_twilight_end));
-				   												timesObject.solarNoon = getSeconds(toTimeZone(data.results.solar_noon));
-
-				   												timesArray.push(timesObject);
+													function getSeconds(time) {
+														time = time.split(":");
+														var seconds = time[2].split(" ")[0];
+														var ampm = time[2].split(" ")[1];
+														var timeInSeconds = ((parseInt(time[0])*60)*60) + (parseInt(time[1])*60) + (parseInt(seconds));
+														if (ampm === "pm") {
+															timeInSeconds += 43200;
+														}
+														var timeFraction = timeInSeconds/86400
+														return timeFraction;
+													}
 
 
-												    		$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + toTimeZone(data.results.sunrise) + "</td><td>" + toTimeZone(data.results.sunset) + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default' data-toggle='modal' data-target='#modal" + i + "'>More Info</button></td></tr>");
-											    			$(".modals").append('<div class="modal fade" id="modal' + i + '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">' + splitDate + '</h4></div><div class="modal-body">' + '<div class="modal-details">Astronomical twilight Begins: ' + toTimeZone(data.results.astronomical_twilight_begin) + '</div>' + '<div class="modal-details">Astronomical Twilight Ends: ' + toTimeZone(data.results.astronomical_twilight_end) + '</div><div class="modal-details">Civil Twilight Begins: ' + toTimeZone(data.results.civil_twilight_begin) + '</div><div class="modal-details">Civil Twilight Ends: ' + toTimeZone(data.results.civil_twilight_end) + '</div>' + '<div class="modal-details">Nautical Twilight Begins: ' + toTimeZone(data.results.nautical_twilight_begin) + '</div><div class="modal-details">Nautical Twilight Ends: ' + toTimeZone(data.results.nautical_twilight_end) + '</div><div class="modal-details">Solar Noon: ' + toTimeZone(data.results.solar_noon) + '</div><div class="modal-footer"></div></div></div></div>');
-										    			  i += 1;
-											    			return data;
-											    		}
-														}).done(function() {
-															for (var i = 0; i <= dates.length; i++){
-																$(".date" + i).text(dates[i]);
-															}
+								    			timesObject.sunrise = getSeconds(toTimeZone(data.results.sunrise));
+   												timesObject.sunset = getSeconds(toTimeZone(data.results.sunset));
+   												timesObject.dayLength = getSeconds(data.results.day_length);
+   												timesObject.astroTwilightBegin = getSeconds(toTimeZone(data.results.astronomical_twilight_begin));
+   												timesObject.astroTwilightEnd = getSeconds(toTimeZone(data.results.astronomical_twilight_end));
+   												timesObject.civilTwilightBegin = getSeconds(toTimeZone(data.results.civil_twilight_begin));
+   												timesObject.civilTwilightEnd = getSeconds(toTimeZone(data.results.civil_twilight_end));
+   												timesObject.nauticalTwilightBegin = getSeconds(toTimeZone(data.results.nautical_twilight_begin));
+   												timesObject.nauticalTwilightEnd = getSeconds(toTimeZone(data.results.nautical_twilight_end));
+   												timesObject.solarNoon = getSeconds(toTimeZone(data.results.solar_noon));
 
-															for (var i = 0; i < timesArray.length; i++) {
-																timesArray[i].date = dates[i];
-															}
-															console.log(timesArray);
+   												timesArray.push(timesObject);
 
-															// var w = 100;
-            			// 						var h = 340;
-            			// 						var barPadding = 1;
-			   									// 		var svg = d3.select(".deethree")
-												   // 								.append("svg")
-									      //                   .attr("width", w + "%")
-									      //                   .attr("height", h + "px");
-									      //       svg.selectAll("rect")
-						         //           .data(timesArray)
-						         //           .enter()
-						         //           .append("rect")
-						         //           .attr("x", function(d, i) {
-						         //                return i * (w / timesArray.length);
-						         //            })
-						         //           .attr("y", function(d) {
-						         //                return h - d.sunrise;  //Height minus data value
-						         //            })
-						         //           .attr("width", w / timesArray.length - barPadding)
-						         //           .attr("height", function(d) {
-						         //                return d.sunrise * 4;
-						         //            });
+
+								    		$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + toTimeZone(data.results.sunrise) + "</td><td>" + toTimeZone(data.results.sunset) + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default' data-toggle='modal' data-target='#modal" + i + "'>More Info</button></td></tr>");
+							    			$(".modals").append('<div class="modal fade" id="modal' + i + '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">' + splitDate + '</h4></div><div class="modal-body">' + '<div class="modal-details">Astronomical twilight Begins: ' + toTimeZone(data.results.astronomical_twilight_begin) + '</div>' + '<div class="modal-details">Astronomical Twilight Ends: ' + toTimeZone(data.results.astronomical_twilight_end) + '</div><div class="modal-details">Civil Twilight Begins: ' + toTimeZone(data.results.civil_twilight_begin) + '</div><div class="modal-details">Civil Twilight Ends: ' + toTimeZone(data.results.civil_twilight_end) + '</div>' + '<div class="modal-details">Nautical Twilight Begins: ' + toTimeZone(data.results.nautical_twilight_begin) + '</div><div class="modal-details">Nautical Twilight Ends: ' + toTimeZone(data.results.nautical_twilight_end) + '</div><div class="modal-details">Solar Noon: ' + toTimeZone(data.results.solar_noon) + '</div><div class="modal-footer"></div></div></div></div>');
+						    			  i += 1;
+							    			return data;
+							    		}
+										}).done(function() {
+											for (var i = 0; i <= dates.length; i++){
+												$(".date" + i).text(dates[i]);
+											}
+
+											for (var i = 0; i < timesArray.length; i++) {
+												timesArray[i].date = dates[i];
+											}
+											console.log(timesArray);
+
+								var w = 500;
+								var h = 300;
+								var barPadding = 1;
+									var svg = d3.select(".deethree")
+								   			.append("svg")
+					                        .attr("width", w + "px")
+					                        .attr("height", h + "px");
+					            svg.selectAll("rect")
+		                   		.data(timesArray)
+		                   		.enter()
+		                   		.append("rect")
+		                   		.attr("x", function(d, i) {
+		                        return i * (w / timesArray.length);
+		                    	})
+		                   		.attr("y", function(d) {
+		                        return h - d[-1].sunrise;  //Height minus data value
+		                    	})
+		                   		.attr("width", w / timesArray.length - barPadding)
+		                   		.attr("height", function(d) {
+		                        return d[-1].sunrise * 4;
+		                    	});
 
 
 														}); //end of api call

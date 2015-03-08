@@ -52,30 +52,17 @@ app.controller('MainCtrl', [
 							    		success: function(data) {
 								    			function toTimeZone(time) {
 								    				if ($("#zone").val().toString() === "current") {
-								    					var date = new Date(dashDate + " " + time);
+								    					var date = new Date(dashDate + " " + time + " UTC");
 								    					console.log(date);
 								    					return moment(date).format("h:mm:ss a");
 								    				} else {
 								    					var timezone = $("#zone").val();
-									    				var sunrise = moment.tz(splitDashDate + " " + time);
-									    				return sunrise.tz(timezone).format("h:mm:ss a");
+									    				var sunrise = new Date(splitDashDate + " " + time + " UTC");
+									    				console.log(sunrise);
+									    				return moment(sunrise).tz(timezone).format("h:mm:ss a");
 									    				console.log(timezone);
 								    				}
 								    			}
-
-								    			var timesObject = {
-								    				'date': '',
-								    				'sunrise': '',
-								    				'sunset': '',
-								    				'dayLength': '',
-								    				'astroTwilightBegin': '',
-								    				'astroTwilightEnd': '',
-								    				'civilTwilightBegin': '',
-								    				'civilTwilightEnd': '',
-								    				'nauticalTwilightBegin': '',
-								    				'nauticalTwilightEnd': '',
-								    				'solarNoon': ''
-													}
 
 													function getSeconds(time) {
 														time = time.split(":");
@@ -87,6 +74,20 @@ app.controller('MainCtrl', [
 														}
 														var timeFraction = timeInSeconds/86400
 														return timeFraction;
+													}
+
+													var timesObject = {
+								    				'date': '',
+								    				'sunrise': '',
+								    				'sunset': '',
+								    				'dayLength': '',
+								    				'astroTwilightBegin': '',
+								    				'astroTwilightEnd': '',
+								    				'civilTwilightBegin': '',
+								    				'civilTwilightEnd': '',
+								    				'nauticalTwilightBegin': '',
+								    				'nauticalTwilightEnd': '',
+								    				'solarNoon': ''
 													}
 
 

@@ -1,8 +1,8 @@
 var app = angular.module("sunrise-times", ['ui.bootstrap']);
 
 app.controller('MainCtrl', [
-	'$scope',
-	function($scope){
+	'$scope', 'dthreeService',
+	function($scope, dthreeService){
 
   	$scope.open = function($event, opened) {
 	    $event.preventDefault();

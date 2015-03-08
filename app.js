@@ -31,9 +31,9 @@ app.controller('MainCtrl', [
 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
 			address = address.toString();
 
-			var startDate = $scope.startDate;
-			var startDateMilli = new Date($scope.startDate).getTime();
-			var endDateMilli = new Date($scope.endDate).getTime();
+			var startDate = new Date($scope.startDate).setHours(00, 00, 00, 00);
+			var startDateMilli = new Date($scope.startDate).setHours(00, 00, 00, 00);
+			var endDateMilli = new Date($scope.endDate).setHours(00, 00, 00, 00);
 
 			var dates = [];
 
@@ -43,8 +43,8 @@ app.controller('MainCtrl', [
   			{
    			  var i = 0;
    			  var timesArray = [];
-	   			// while (startDateMilli <= (endDateMilli + 86400000)) {
-	   			while (startDateMilli <= (endDateMilli)) {
+	   			
+	   			while (startDateMilli <= endDateMilli) {
 
 	   				var currentDate = new Date(startDateMilli);
 	   				var splitDate = moment(currentDate).format("M-D-YYYY");
@@ -129,29 +129,29 @@ app.controller('MainCtrl', [
 											var endDateMidnight = new Date($scope.endDate).setHours(00, 00, 00, 00) / 86400000;
 											console.log(timesArray.length);
 
-										if (timesArray.length === (endDateMidnight - startDateMidnight)) {
-											var w = 500;
-											var h = 300;
-											var barPadding = 1;
-												var svg = d3.select(".deethree")
-											   			.append("svg")
-								                        .attr("width", w + "px")
-								                        .attr("height", h + "px");
-								            svg.selectAll("rect")
-					                   		.data(timesArray)
-					                   		.enter()
-					                   		.append("rect")
-					                   		.attr("x", function(d, i) {
-					                        return i * (w / timesArray.length);
-					                    	})
-					                   		.attr("y", function(d) {
-					                        return h - d[0].sunrise;  //Height minus data value
-					                    	})
-					                   		.attr("width", w / timesArray.length - barPadding)
-					                   		.attr("height", function(d) {
-					                        return d[0].sunrise * 4;
-					                    	});
-					          }
+										// if (timesArray.length === (endDateMidnight - startDateMidnight)) {
+										// 	var w = 500;
+										// 	var h = 300;
+										// 	var barPadding = 1;
+										// 		var svg = d3.select(".deethree")
+										// 	   			.append("svg")
+								  //                       .attr("width", w + "px")
+								  //                       .attr("height", h + "px");
+								  //           svg.selectAll("rect")
+					     //               		.data(timesArray)
+					     //               		.enter()
+					     //               		.append("rect")
+					     //               		.attr("x", function(d, i) {
+					     //                    return i * (w / timesArray.length);
+					     //                	})
+					     //               		.attr("y", function(d) {
+					     //                    return h - d[0].sunrise;  //Height minus data value
+					     //                	})
+					     //               		.attr("width", w / timesArray.length - barPadding)
+					     //               		.attr("height", function(d) {
+					     //                    return d[0].sunrise * 4;
+					     //                	});
+					     //      }
 
 														}); //end of api call
 						startDateMilli += 86400000;

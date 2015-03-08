@@ -53,14 +53,11 @@ app.controller('MainCtrl', [
 								    			function toTimeZone(time) {
 								    				if ($("#zone").val().toString() === "current") {
 								    					var date = new Date(dashDate + " " + time + " UTC");
-								    					console.log(date);
 								    					return moment(date).format("h:mm:ss a");
 								    				} else {
 								    					var timezone = $("#zone").val();
 									    				var sunrise = new Date(splitDashDate + " " + time + " UTC");
-									    				console.log(sunrise);
 									    				return moment(sunrise).tz(timezone).format("h:mm:ss a");
-									    				console.log(timezone);
 								    				}
 								    			}
 

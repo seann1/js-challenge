@@ -1,4 +1,4 @@
-var app = angular.module("sunrise-times", ['ui.bootstrap']);
+var app = angular.module("sunrise-times", ['ui.bootstrap', 'sunrise-times.services']);
 
 app.controller('MainCtrl', [
 	'$scope', 'dthreeService',

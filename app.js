@@ -60,11 +60,12 @@ app.controller('MainCtrl', [
 							    		success: function(data) {
 								    			function toTimeZone(time) {
 								    				if ($("#zone").val().toString() === "current") {
-								    					var date = new Date(dashDate + " " + time + " UTC");
+								    					var date = new Date(dashDate + " " + time);
+								    					console.log(date);
 								    					return moment(date).format("h:mm:ss a");
 								    				} else {
 								    					var timezone = $("#zone").val();
-									    				var sunrise = moment.tz(splitDashDate + " " + time, "UTC");
+									    				var sunrise = moment.tz(splitDashDate + " " + time);
 									    				return sunrise.tz(timezone).format("h:mm:ss a");
 									    				console.log(timezone);
 								    				}
@@ -127,7 +128,6 @@ app.controller('MainCtrl', [
 
 											var startDateMidnight = new Date($scope.startDate).setHours(00, 00, 00, 00) / 86400000;
 											var endDateMidnight = new Date($scope.endDate).setHours(00, 00, 00, 00) / 86400000;
-											console.log(timesArray.length);
 
 										// if (timesArray.length === (endDateMidnight - startDateMidnight)) {
 										// 	var w = 500;

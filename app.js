@@ -43,8 +43,8 @@ app.controller('MainCtrl', [
 	   				var currentDate = moment.tz(startDateMilli, "UTC").format();
 
 	   				var splitDate = moment.tz(currentDate, "UTC").format("M-D-YYYY");
-	   				var dashDate = moment(currentDate).format("M/D/YYYY");
-	   				var splitDashDate = moment(currentDate).format('YYYY-MM-DD');
+	   				var dashDate = moment.tz(currentDate, "UTC").format("M/D/YYYY");
+	   				var splitDashDate = moment.tz(currentDate, "UTC").format('YYYY-MM-DD');
 	   				dates.push(splitDate);
 	   				var latitude = results[0].geometry.location.lat();
 	   				var longitude = results[0].geometry.location.lng();

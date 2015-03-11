@@ -22,10 +22,11 @@ app.controller('MainCtrl', [
 			$("#sunrises").empty();
 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
 			address = address.toString();
-
-			var startDate = new Date($scope.startDate).setHours(00, 00, 00, 00);
-			var startDateMilli = new Date($scope.startDate).setHours(00, 00, 00, 00);
-			var endDateMilli = new Date($scope.endDate).setHours(00, 00, 00, 00);
+			//get start and end dates, all in UTC
+			var startDate = moment($scope.startDate).utc().startOf('day').format();
+			var startDateMilli = Date.UTC(parseInt(startDate.substring(0,4)-1), parseInt(startDate.substring(5,7) -1), startDate.substring(8,10));
+			var endDate = moment($scope.endDate).utc().startOf('day').format();
+			var endDateMilli = Date.UTC(parseInt(endDate.substring(0,4)-1), parseInt(endDate.substring(5,7) -1), endDate.substring(8,10));
 
 			var dates = [];
 
@@ -38,8 +39,10 @@ app.controller('MainCtrl', [
 	   			
 	   			while (startDateMilli <= endDateMilli) {
 
-	   				var currentDate = new Date(startDateMilli);
-	   				var splitDate = moment(currentDate).format("M-D-YYYY");
+	   				//current date is in pacific time (not sure if that's right)
+	   				var currentDate = moment.tz(startDateMilli, "UTC").format();
+
+	   				var splitDate = moment.tz(currentDate, "UTC").format("M-D-YYYY");
 	   				var dashDate = moment(currentDate).format("M/D/YYYY");
 	   				var splitDashDate = moment(currentDate).format('YYYY-MM-DD');
 	   				dates.push(splitDate);
@@ -118,10 +121,10 @@ app.controller('MainCtrl', [
 
 											var startDateMidnight = new Date($scope.startDate).setHours(00, 00, 00, 00) / 86400000;
 											var endDateMidnight = new Date($scope.endDate).setHours(00, 00, 00, 00) / 86400000;
-
+											console.log(timesArray);
 										if (timesArray.length === (endDateMidnight - startDateMidnight)) {
-
-											deethreeService();
+											console.log("hi")
+											console.log(dthreeService.makeGraph)
 
 											// var w = 500;
 											// var h = 300;

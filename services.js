@@ -1,5 +1,9 @@
-var app = angular.module("sunrise-times.services", ['ui.bootstrap']).
+var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
 	.factory('dthreeService', function(){
-    var users = "hi";
-    return users;
+    return {
+    	makeGraph: function() {
+    		return "hi";
+    	}
+    }
+
 });

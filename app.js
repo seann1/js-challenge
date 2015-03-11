@@ -119,29 +119,32 @@ app.controller('MainCtrl', [
 											var startDateMidnight = new Date($scope.startDate).setHours(00, 00, 00, 00) / 86400000;
 											var endDateMidnight = new Date($scope.endDate).setHours(00, 00, 00, 00) / 86400000;
 
-										// if (timesArray.length === (endDateMidnight - startDateMidnight)) {
-										// 	var w = 500;
-										// 	var h = 300;
-										// 	var barPadding = 1;
-										// 		var svg = d3.select(".deethree")
-										// 	   			.append("svg")
-								  //                       .attr("width", w + "px")
-								  //                       .attr("height", h + "px");
-								  //           svg.selectAll("rect")
-					     //               		.data(timesArray)
-					     //               		.enter()
-					     //               		.append("rect")
-					     //               		.attr("x", function(d, i) {
-					     //                    return i * (w / timesArray.length);
-					     //                	})
-					     //               		.attr("y", function(d) {
-					     //                    return h - d[0].sunrise;  //Height minus data value
-					     //                	})
-					     //               		.attr("width", w / timesArray.length - barPadding)
-					     //               		.attr("height", function(d) {
-					     //                    return d[0].sunrise * 4;
-					     //                	});
-					     //      }
+										if (timesArray.length === (endDateMidnight - startDateMidnight)) {
+
+											deethreeService();
+
+											// var w = 500;
+											// var h = 300;
+											// var barPadding = 1;
+											// 	var svg = d3.select(".deethree")
+											//    			.append("svg")
+								   //                      .attr("width", w + "px")
+								   //                      .attr("height", h + "px");
+								   //          svg.selectAll("rect")
+					      //              		.data(timesArray)
+					      //              		.enter()
+					      //              		.append("rect")
+					      //              		.attr("x", function(d, i) {
+					      //                   return i * (w / timesArray.length);
+					      //               	})
+					      //              		.attr("y", function(d) {
+					      //                   return h - d[0].sunrise;  //Height minus data value
+					      //               	})
+					      //              		.attr("width", w / timesArray.length - barPadding)
+					      //              		.attr("height", function(d) {
+					      //                   return d[0].sunrise * 4;
+					      //               	});
+					          }
 
 														}); //end of api call
 						startDateMilli += 86400000;

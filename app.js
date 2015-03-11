@@ -126,7 +126,7 @@ app.controller('MainCtrl', [
 											console.log(timesArray);
 										if (timesArray.slice(-1)[0].date === endDateUnformat) {
 											console.log("hi")
-											dthreeService.makeGraph()
+											console.log(dthreeService.makeGraph(timesArray));
 
 											// var w = 500;
 											// var h = 300;

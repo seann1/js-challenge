@@ -24,9 +24,10 @@ app.controller('MainCtrl', [
 			address = address.toString();
 			//get start and end dates, all in UTC
 			var startDate = moment($scope.startDate).utc().startOf('day').format();
-			var startDateMilli = Date.UTC(parseInt(startDate.substring(0,4)-1), parseInt(startDate.substring(5,7) -1), startDate.substring(8,10));
+			var startDateMilli = Date.UTC(parseInt(startDate.substring(0,4)), parseInt(startDate.substring(5,7) -1), startDate.substring(8,10));
+			var startDateMilliTwo = Date.UTC(parseInt(startDate.substring(0,4)), parseInt(startDate.substring(5,7) -1), startDate.substring(8,10));
 			var endDate = moment($scope.endDate).utc().startOf('day').format();
-			var endDateMilli = Date.UTC(parseInt(endDate.substring(0,4)-1), parseInt(endDate.substring(5,7) -1), endDate.substring(8,10));
+			var endDateMilli = Date.UTC(parseInt(endDate.substring(0,4)), parseInt(endDate.substring(5,7) -1), endDate.substring(8,10));
 
 			var dates = [];
 
@@ -59,12 +60,12 @@ app.controller('MainCtrl', [
 								    					return moment(date).format("h:mm:ss a");
 								    				} else {
 								    					var timezone = $("#zone").val();
-									    				var sunrise = new Date(splitDashDate + " " + time + " UTC");
-									    				return moment(sunrise).tz(timezone).format("h:mm:ss a");
+									    				var date = new Date(splitDashDate + " " + time + " UTC");
+									    				return moment(date).tz(timezone).format("h:mm:ss a");
 								    				}
 								    			}
 
-													function getSeconds(time) {
+													function toSeconds(time) {
 														time = time.split(":");
 														var seconds = time[2].split(" ")[0];
 														var ampm = time[2].split(" ")[1];
@@ -91,16 +92,16 @@ app.controller('MainCtrl', [
 													}
 
 
-								    			timesObject.sunrise = getSeconds(toTimeZone(data.results.sunrise));
-   												timesObject.sunset = getSeconds(toTimeZone(data.results.sunset));
-   												timesObject.dayLength = getSeconds(data.results.day_length);
-   												timesObject.astroTwilightBegin = getSeconds(toTimeZone(data.results.astronomical_twilight_begin));
-   												timesObject.astroTwilightEnd = getSeconds(toTimeZone(data.results.astronomical_twilight_end));
-   												timesObject.civilTwilightBegin = getSeconds(toTimeZone(data.results.civil_twilight_begin));
-   												timesObject.civilTwilightEnd = getSeconds(toTimeZone(data.results.civil_twilight_end));
-   												timesObject.nauticalTwilightBegin = getSeconds(toTimeZone(data.results.nautical_twilight_begin));
-   												timesObject.nauticalTwilightEnd = getSeconds(toTimeZone(data.results.nautical_twilight_end));
-   												timesObject.solarNoon = getSeconds(toTimeZone(data.results.solar_noon));
+								    			timesObject.sunrise = toSeconds(toTimeZone(data.results.sunrise));
+   												timesObject.sunset = toSeconds(toTimeZone(data.results.sunset));
+   												timesObject.dayLength = toSeconds(data.results.day_length);
+   												timesObject.astroTwilightBegin = toSeconds(toTimeZone(data.results.astronomical_twilight_begin));
+   												timesObject.astroTwilightEnd = toSeconds(toTimeZone(data.results.astronomical_twilight_end));
+   												timesObject.civilTwilightBegin = toSeconds(toTimeZone(data.results.civil_twilight_begin));
+   												timesObject.civilTwilightEnd = toSeconds(toTimeZone(data.results.civil_twilight_end));
+   												timesObject.nauticalTwilightBegin = toSeconds(toTimeZone(data.results.nautical_twilight_begin));
+   												timesObject.nauticalTwilightEnd = toSeconds(toTimeZone(data.results.nautical_twilight_end));
+   												timesObject.solarNoon = toSeconds(toTimeZone(data.results.solar_noon));
 
    												timesArray.push(timesObject);
 
@@ -120,10 +121,10 @@ app.controller('MainCtrl', [
 												timesArray[i].date = dates[i];
 											}
 
-											var startDateMidnight = new Date($scope.startDate).setHours(00, 00, 00, 00) / 86400000;
-											var endDateMidnight = new Date($scope.endDate).setHours(00, 00, 00, 00) / 86400000;
+											var endDateUnformat = moment($scope.endDate).utc().startOf('day').format("M-D-YYYY");
+
 											console.log(timesArray);
-										if (timesArray.length === (endDateMidnight - startDateMidnight)) {
+										if (timesArray.slice(-1)[0].date === endDateUnformat) {
 											console.log("hi")
 											console.log(dthreeService.makeGraph)
 

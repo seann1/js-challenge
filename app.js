@@ -24,9 +24,11 @@ app.controller('MainCtrl', [
 			address = address.toString();
 			//get start and end dates, all in UTC
 			var startDate = moment($scope.startDate).utc().startOf('day').format();
+			var counterStartDate = moment($scope.startDate);
 			var startDateMilli = Date.UTC(parseInt(startDate.substring(0,4)), parseInt(startDate.substring(5,7) -1), startDate.substring(8,10));
 			var startDateMilliTwo = Date.UTC(parseInt(startDate.substring(0,4)), parseInt(startDate.substring(5,7) -1), startDate.substring(8,10));
 			var endDate = moment($scope.endDate).utc().startOf('day').format();
+			var counterEndDate = moment($scope.endDate);
 			var endDateMilli = Date.UTC(parseInt(endDate.substring(0,4)), parseInt(endDate.substring(5,7) -1), endDate.substring(8,10));
 
 			var dates = [];
@@ -38,25 +40,24 @@ app.controller('MainCtrl', [
    			  var i = 0;
    			  var timesArray = [];
 	   			
-	   			while (startDateMilli <= endDateMilli) {
-
-	   				//current date is in pacific time (not sure if that's right)
+	   			while (counterStartDate.unix() <= counterEndDate.unix()) {
 	   				var currentDate = moment.tz(startDateMilli, "UTC").format();
 
-	   				var splitDate = moment.tz(currentDate, "UTC").format("M-D-YYYY");
+	   				var splitDate = moment(currentDate).format("M-D-YYYY");
 	   				var dashDate = moment.tz(currentDate, "UTC").format("M/D/YYYY");
 	   				var splitDashDate = moment.tz(currentDate, "UTC").format('YYYY-MM-DD');
-	   				dates.push(splitDate);
+	   				dates.push(counterStartDate.format("M-D-YYYY"));
 	   				var latitude = results[0].geometry.location.lat();
 	   				var longitude = results[0].geometry.location.lng();
-	 					var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + latitude + "&lng=" + longitude + "&date=" + splitDashDate + "&callback=mycallback";
+	 					var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + latitude + "&lng=" + longitude + "&date=" + counterStartDate.format("YYYY-MM-DD") + "&callback=mycallback";
 			   		var response = $.ajax({
 							    		url: sunriseurl,
 							    		dataType: "JSONP",
 							    		success: function(data) {
 								    			function toTimeZone(time) {
 								    				if ($("#zone").val().toString() === "current") {
-								    					var date = new Date(dashDate + " " + time + " UTC");
+								    					var date = new Date(counterStartDate.format("M/D/YYYY") + " " + time + " UTC");
+								    					console.log(date);
 								    					return moment(date).format("h:mm:ss a");
 								    				} else {
 								    					var timezone = $("#zone").val();
@@ -132,6 +133,7 @@ app.controller('MainCtrl', [
 
 														}); //end of api call
 						startDateMilli += 86400000;
+						counterStartDate = counterStartDate.add(1, 'days');
 			   	} //end of while loop
 
 			} //end of if statement

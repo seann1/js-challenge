@@ -22,7 +22,7 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
                 	})
                		.attr("width", w / array.length - barPadding)
                		.attr("height", function(d) {
-                    return d.sunrise * 4;
+                    return d.sunrise * 40;
                 	});
 
     		return svg;

@@ -90,17 +90,25 @@ td {
   margin: 5px;
 }
 
-/* line 31, ../sass/screen.scss */
-.deethree {
-  position: absolute;
-  height: 340px;
-  width: 500px;
-  border-width: 1px;
-  border-color: black;
-  border-style: solid;
+/* line 45, ../sass/screen.scss */
+.axis path, .axis line {
+  fill: none;
+  stroke: #777;
+  shape-rendering: crispEdges;
 }
 
-/* line 41, ../sass/screen.scss */
-.background {
-  fill: red;
+/* line 52, ../sass/screen.scss */
+.axis text {
+  font-family: 'Arial';
+  font-size: 13px;
+}
+
+/* line 57, ../sass/screen.scss */
+.tick {
+  stroke-dasharray: 1, 2;
+}
+
+/* line 61, ../sass/screen.scss */
+.bar {
+  fill: FireBrick;
 }

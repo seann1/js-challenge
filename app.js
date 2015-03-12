@@ -57,7 +57,6 @@ app.controller('MainCtrl', [
 								    			function toTimeZone(time) {
 								    				if ($("#zone").val().toString() === "current") {
 								    					var date = new Date(counterStartDate.format("M/D/YYYY") + " " + time + " UTC");
-								    					console.log(date);
 								    					return moment(date).format("h:mm:ss a");
 								    				} else {
 								    					var timezone = $("#zone").val();
@@ -80,6 +79,7 @@ app.controller('MainCtrl', [
 
 													var timesObject = {
 								    				'date': '',
+								    				'unixDate': '',
 								    				'sunrise': '',
 								    				'sunset': '',
 								    				'dayLength': '',
@@ -120,13 +120,12 @@ app.controller('MainCtrl', [
 
 											for (var i = 0; i < timesArray.length; i++) {
 												timesArray[i].date = dates[i];
+												timesArray[i].unixDate = moment(dates[i]).unix();
 											}
 
 											var endDateUnformat = moment($scope.endDate).utc().startOf('day').format("M-D-YYYY");
 
-											console.log(timesArray);
 										if (timesArray.slice(-1)[0].date === endDateUnformat) {
-											console.log("hi")
 											dthreeService.makeGraph(timesArray);
 
 					          }

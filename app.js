@@ -124,11 +124,8 @@ app.controller('MainCtrl', [
 											}
 
 											var endDateUnformat = moment($scope.endDate).utc().startOf('day').format("M-D-YYYY");
-
-										if (timesArray.slice(-1)[0].date === endDateUnformat) {
+											$("#visualisation").empty();
 											dthreeService.makeGraph(timesArray);
-
-					          }
 
 														}); //end of api call
 						startDateMilli += 86400000;

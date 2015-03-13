@@ -29,6 +29,12 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
         {hour: '10:00 pm', number: 22},
         {hour: '11:00 pm', number: 23}];
 
+        xTicks = [];
+
+        for (var i = 0; i < array.length; i++) {
+          xTicks.push(i.date);
+        }
+
 
   var vis = d3.select('#visualisation'),
     WIDTH = 1000,
@@ -40,9 +46,9 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       left: 50
     },
     xRange = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([d3.min(array, function(d) {
-      return parseInt(d.unixDate);
+      return moment(d.date);
     }), d3.max(array, function(d) {
-      return parseInt(d.unixDate);
+      return moment(d.date);
     })]),
     yRange = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([d3.min(timesOfDay, function(d) {
       return d.number;
@@ -52,6 +58,9 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
     xAxis = d3.svg.axis()
       .scale(xRange)
       .tickSize(5)
+      .tickFormat(function(d) {
+        return moment(d).format("M-D-YYYY");
+      })
       .tickSubdivide(true),
     yAxis = d3.svg.axis()
       .scale(yRange)

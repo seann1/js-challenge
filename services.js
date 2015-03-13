@@ -65,6 +65,8 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
     yAxis = d3.svg.axis()
       .scale(yRange)
       .tickSize(5)
+      .tickFormat(function(d){
+        return moment(d.hour).format("h:mm a")})
       .orient('left')
       .tickSubdivide(true);
  

@@ -3,32 +3,6 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
     return {
     	makeGraph: function(array) {
 
-        // var timesOfDay = [
-        // {hour: '00:00'},
-        // {hour: '01:00'},
-        // {hour: 02:00},
-        // {hour: 03:00},
-        // {hour: 04:00},
-        // {hour: 05:00},
-        // {hour: 06:00},
-        // {hour: 07:00},
-        // {hour: },
-        // {hour: },
-        // {hour: },
-        // {hour: '11:00 am'},
-        // {hour: '12:00 pm'},
-        // {hour: '1:00 pm'},
-        // {hour: '2:00 pm'},
-        // {hour: '3:00 pm'},
-        // {hour: '4:00 pm'},
-        // {hour: '5:00 pm'},
-        // {hour: '6:00 pm'},
-        // {hour: '7:00 pm'},
-        // {hour: '8:00 pm'},
-        // {hour: '9:00 pm'},
-        // {hour: '10:00 pm'},
-        // {hour: 24:00}];
-
         var numbers = [];
         var hours = [];
         var d3Dates = [];
@@ -44,7 +18,7 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
 
 
   var vis = d3.select('#visualisation'),
-    WIDTH = 1000,
+    WIDTH = 700,
     HEIGHT = 500,
     MARGINS = {
       top: 20,
@@ -68,7 +42,7 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
     //     return moment(d.hour);
     //   })]),
 
-    yRange = d3.time.scale().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([moment({hour: 0}), moment({hour: 24})]),
+    yRange = d3.time.scale().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([moment({hour: 0}), moment({hour: 23})]),
 
     xAxis = d3.svg.axis()
       .scale(xRange)
@@ -82,6 +56,7 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .scale(yRange)
       .ticks(d3.time.hour, 1)
       .tickSize(5)
+      .tickFormat(d3.time.format("%I %p"))
       .orient('left')
       .tickSubdivide(true);
  

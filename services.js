@@ -29,11 +29,13 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
         {hour: '10:00 pm', number: 22},
         {hour: '11:00 pm', number: 23}];
 
-        xTicks = [];
+        var numbers = [];
+        var hours = [];
 
-        for (var i = 0; i < array.length; i++) {
-          xTicks.push(i.date);
-        }
+        for (var i = 0; i < timesOfDay.length; i++) {
+          numbers.push(i.number);
+          hours.push(i.number);
+        } 
 
 
   var vis = d3.select('#visualisation'),
@@ -43,10 +45,10 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       top: 20,
       right: 20,
       bottom: 20,
-      left: 50
+      left: 70
     },
-    xRange = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([d3.min(array, function(d) {
-      return moment(d.date);
+    xRange = d3.time.scale().range([MARGINS.left, WIDTH - MARGINS.right]).domain([d3.min(array, function(d) {
+    return moment(d.date);
     }), d3.max(array, function(d) {
       return moment(d.date);
     })]),
@@ -64,9 +66,9 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .tickSubdivide(true),
     yAxis = d3.svg.axis()
       .scale(yRange)
+      .ticks(numbers)
+      .tickValues(hours)
       .tickSize(5)
-      .tickFormat(function(d){
-        return moment(d.hour).format("h:mm a")})
       .orient('left')
       .tickSubdivide(true);
  
@@ -80,31 +82,6 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .attr('transform', 'translate(' + (MARGINS.left) + ',0)')
       .call(yAxis);
     return vis;
-
-    // 		var w = 500;
-				// var h = 300;
-				// var barPadding = 1;
-				// 	var svg = d3.select(".deethree")
-				//    			.append("svg")
-	   //                      .attr("width", w + "px")
-	   //                      .attr("height", h + "px");
-	   //          svg.selectAll("rect")
-    //            		.data(array)
-    //            		.enter()
-    //            		.append("rect")
-    //            		.attr("x", function(d, i) {
-    //                 return i * (w / array.length);
-    //             	})
-    //            		.attr("y", function(d) {
-    //            			console.log(d);
-    //                 return h - (d.sunrise * h);  //Height minus data value
-    //             	})
-    //            		.attr("width", w / array.length - barPadding)
-    //            		.attr("height", function(d) {
-    //                 return d.sunrise * 40;
-    //             	});
-
-    // 		return svg;
     	}
     }
 	});

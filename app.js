@@ -105,7 +105,6 @@ app.controller('MainCtrl', [
    												timesObject.solarNoon = toSeconds(toTimeZone(data.results.solar_noon));
 
    												timesArray.push(timesObject);
-   												console.log(timesArray);
 
 
 								    		$("#sunrises").append("<tr class='day day" + i + "'><td class='date date" + i + "'>" + "</td><td>" + toTimeZone(data.results.sunrise) + "</td><td>" + toTimeZone(data.results.sunset) + "</td><td>" + data.results.day_length + "</td><td><button class='btn btn-default' data-toggle='modal' data-target='#modal" + i + "'>More Info</button></td></tr>");

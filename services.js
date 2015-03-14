@@ -31,6 +31,11 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
 
         var numbers = [];
         var hours = [];
+        var d3Dates = [];
+
+        for (var i = 0; i < array.length; i++) {
+          d3Dates.push(array[i].date);
+        }
 
         for (var i = 0; i < timesOfDay.length; i++) {
           numbers.push(i.number);
@@ -47,11 +52,14 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       bottom: 20,
       left: 70
     },
-    xRange = d3.time.scale().range([MARGINS.left, WIDTH - MARGINS.right]).domain([d3.min(array, function(d) {
-    return moment(d.date);
-    }), d3.max(array, function(d) {
-      return moment(d.date);
-    })]),
+    xRange = d3.time.scale().range([MARGINS.left, WIDTH - MARGINS.right]).domain([
+        d3.min(array, function(d) {
+          return moment(d.date);
+        }),
+        d3.max(array, function(d) {
+          return moment(d.date);
+        })
+      ]),
     yRange = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([d3.min(timesOfDay, function(d) {
       return d.number;
     }), d3.max(timesOfDay, function(d) {
@@ -60,6 +68,7 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
     xAxis = d3.svg.axis()
       .scale(xRange)
       .tickSize(5)
+      .ticks(d3Dates.length)
       .tickFormat(function(d) {
         return moment(d).format("M-D-YYYY");
       })

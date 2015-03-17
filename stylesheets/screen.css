@@ -90,25 +90,32 @@ td {
   margin: 5px;
 }
 
-/* line 45, ../sass/screen.scss */
+/* line 31, ../sass/screen.scss */
+path {
+  stroke: steelblue;
+  stroke-width: 1;
+  fill: none;
+}
+
+/* line 51, ../sass/screen.scss */
 .axis path, .axis line {
   fill: none;
   stroke: #777;
   shape-rendering: crispEdges;
 }
 
-/* line 52, ../sass/screen.scss */
+/* line 58, ../sass/screen.scss */
 .axis text {
   font-family: 'Arial';
   font-size: 13px;
 }
 
-/* line 57, ../sass/screen.scss */
+/* line 63, ../sass/screen.scss */
 .tick {
   stroke-dasharray: 1, 2;
 }
 
-/* line 61, ../sass/screen.scss */
+/* line 67, ../sass/screen.scss */
 .bar {
   fill: FireBrick;
 }

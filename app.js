@@ -80,29 +80,17 @@ app.controller('MainCtrl', [
 													var timesObject = {
 								    				'date': '',
 								    				'unixDate': '',
-								    				'sunrise': '',
-								    				'sunset': '',
-								    				'dayLength': '',
-								    				'astroTwilightBegin': '',
-								    				'astroTwilightEnd': '',
-								    				'civilTwilightBegin': '',
-								    				'civilTwilightEnd': '',
-								    				'nauticalTwilightBegin': '',
-								    				'nauticalTwilightEnd': '',
-								    				'solarNoon': ''
+								    				'sunrise': toTimeZone(data.results.sunrise),
+								    				'sunset': toTimeZone(data.results.sunset),
+								    				'dayLength': data.results.day_length,
+								    				'astroTwilightBegin': toTimeZone(data.results.astronomical_twilight_begin),
+								    				'astroTwilightEnd': toTimeZone(data.results.astronomical_twilight_end),
+								    				'civilTwilightBegin': toTimeZone(data.results.civil_twilight_begin),
+								    				'civilTwilightEnd': toTimeZone(data.results.civil_twilight_end),
+								    				'nauticalTwilightBegin': toTimeZone(data.results.nautical_twilight_begin),
+								    				'nauticalTwilightEnd': toTimeZone(data.results.nautical_twilight_end),
+								    				'solarNoon': toTimeZone(data.results.solar_noon)
 													}
-
-
-								    			timesObject.sunrise = toTimeZone(data.results.sunrise);
-   												timesObject.sunset = toSeconds(toTimeZone(data.results.sunset));
-   												timesObject.dayLength = toSeconds(data.results.day_length);
-   												timesObject.astroTwilightBegin = toSeconds(toTimeZone(data.results.astronomical_twilight_begin));
-   												timesObject.astroTwilightEnd = toSeconds(toTimeZone(data.results.astronomical_twilight_end));
-   												timesObject.civilTwilightBegin = toSeconds(toTimeZone(data.results.civil_twilight_begin));
-   												timesObject.civilTwilightEnd = toSeconds(toTimeZone(data.results.civil_twilight_end));
-   												timesObject.nauticalTwilightBegin = toSeconds(toTimeZone(data.results.nautical_twilight_begin));
-   												timesObject.nauticalTwilightEnd = toSeconds(toTimeZone(data.results.nautical_twilight_end));
-   												timesObject.solarNoon = toSeconds(toTimeZone(data.results.solar_noon));
 
    												timesArray.push(timesObject);
 

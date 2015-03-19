@@ -54,7 +54,6 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Price ($)");
 
   svg.append("path")
       .datum(array)

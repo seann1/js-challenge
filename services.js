@@ -8,13 +8,13 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-  var parseDate = d3.time.format("%m-%d-%y").parse;
+  var parseDate = d3.time.format("%m-%d-%Y").parse;
   var parseTime = d3.time.format("%I:%M:%S %p").parse;
 
   var x = d3.time.scale()
       .range([0, width]);
 
-  var y = d3.scale.linear()
+  var y = d3.time.scale()
       .range([height, 0]);
 
   var xAxis = d3.svg.axis()
@@ -26,12 +26,11 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .orient("left");
 
   var line = d3.svg.line()
-      .x(function(d) { return x(d.date); })
-      .y(function(d) { return y(d.sunrise); });
+      .x(function(d) { return x(parseDate(d.date)); })
+      .y(function(d) { return y(parseTime(d.sunrise)); });
 
-  var svg = d3.select("body")
+  var svg = d3.select("#visualisation")
       .data(array)
-      .enter()
       .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
@@ -39,8 +38,8 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-  x.domain(d3.extent(array, function(d) { return d.date; }));
-  y.domain(d3.extent(array, function(d) { return d.close; }));
+  x.domain(d3.extent(array, function(d) { return parseDate(d.date); }));
+  y.domain(d3.extent(array, function(d) { return parseTime(d.sunrise); }));
 
   svg.append("g")
       .attr("class", "x axis")

@@ -4,32 +4,32 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
     	makeGraph: function(array) {
 
   var times = [{hours: "12:00:00 am"},
-  {hours: "01:00:00 am"},
-  {hours: "02:00:00 am"},
-  {hours: "03:00:00 am"},
-  {hours: "04:00:00 am"},
-  {hours: "05:00:00 am"},
-  {hours: "06:00:00 am"},
-  {hours: "07:00:00 am"},
-  {hours: "08:00:00 am"},
-  {hours: "09:00:00 am"},
-  {hours: "10:00:00 am"},
-  {hours: "11:00:00 am"},
-  {hours: "12:00:00 pm"},
-  {hours: "01:00:00 pm"},
-  {hours: "02:00:00 pm"},
-  {hours: "03:00:00 pm"},
-  {hours: "04:00:00 pm"},
-  {hours: "05:00:00 pm"},
-  {hours: "06:00:00 pm"},
-  {hours: "07:00:00 pm"},
-  {hours: "08:00:00 pm"},
-  {hours: "09:00:00 pm"},
-  {hours: "10:00:00 pm"},
-  {hours: "11:00:00 pm"}];
+    {hours: "01:00:00 am"},
+    {hours: "02:00:00 am"},
+    {hours: "03:00:00 am"},
+    {hours: "04:00:00 am"},
+    {hours: "05:00:00 am"},
+    {hours: "06:00:00 am"},
+    {hours: "07:00:00 am"},
+    {hours: "08:00:00 am"},
+    {hours: "09:00:00 am"},
+    {hours: "10:00:00 am"},
+    {hours: "11:00:00 am"},
+    {hours: "12:00:00 pm"},
+    {hours: "01:00:00 pm"},
+    {hours: "02:00:00 pm"},
+    {hours: "03:00:00 pm"},
+    {hours: "04:00:00 pm"},
+    {hours: "05:00:00 pm"},
+    {hours: "06:00:00 pm"},
+    {hours: "07:00:00 pm"},
+    {hours: "08:00:00 pm"},
+    {hours: "09:00:00 pm"},
+    {hours: "10:00:00 pm"},
+    {hours: "11:00:00 pm"}];
 
 
-  var margin = {top: 20, right: 20, bottom: 30, left: 50},
+  var margin = {top: 20, right: 20, bottom: 30, left: 70},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -48,7 +48,9 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
 
   var yAxis = d3.svg.axis()
       .scale(y)
-      .orient("left");
+      .orient("left")
+      .ticks(d3.time.hours, 1)
+      .tickFormat(d3.time.format("%I:%M %p"));
 
   var line = d3.svg.line()
       .x(function(d) { return x(parseDate(d.date)); })

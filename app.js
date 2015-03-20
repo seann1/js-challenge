@@ -109,7 +109,6 @@ app.controller('MainCtrl', [
 											for (var i = 0; i < timesArray.length; i++) {
 												timesArray[i].unixDate = moment(dates[i]).unix();
 												timesArray[i].date = moment(dates[i]).format("MM-DD-YYYY");
-												console.log(timesArray[i].date);
 											}
 
 											var endDateUnformat = moment($scope.endDate).utc().startOf('day').format("M-D-YYYY");

@@ -29,6 +29,10 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .x(function(d) { return x(parseDate(d.date)); })
       .y(function(d) { return y(parseTime(d.sunrise)); });
 
+  var line2 = d3.svg.line()
+      .x(function(d) { return x(parseDate(d.date)); })
+      .y(function(d) { return y(parseTime(d.sunset)); });
+
   var svg = d3.select("#visualisation")
       .data(array)
       .append("svg")
@@ -39,7 +43,7 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
 
 
   x.domain(d3.extent(array, function(d) { return parseDate(d.date); }));
-  y.domain(d3.extent(array, function(d) { return parseTime(d.sunrise); }));
+  y.domain(d3.extent(array, function(d) { return parseTime(d.sunset); }));
 
   svg.append("g")
       .attr("class", "x axis")
@@ -59,6 +63,11 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .datum(array)
       .attr("class", "line")
       .attr("d", line);
+
+  svg.append("path")
+      .datum(array)
+      .attr("class", "line")
+      .attr("d", line2);
 
 
 

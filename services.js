@@ -3,6 +3,31 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
     return {
     	makeGraph: function(array) {
 
+  var times = [{hours: "12:00:00 am"},
+  {hours: "01:00:00 am"},
+  {hours: "02:00:00 am"},
+  {hours: "03:00:00 am"},
+  {hours: "04:00:00 am"},
+  {hours: "05:00:00 am"},
+  {hours: "06:00:00 am"},
+  {hours: "07:00:00 am"},
+  {hours: "08:00:00 am"},
+  {hours: "09:00:00 am"},
+  {hours: "10:00:00 am"},
+  {hours: "11:00:00 am"},
+  {hours: "12:00:00 pm"},
+  {hours: "01:00:00 pm"},
+  {hours: "02:00:00 pm"},
+  {hours: "03:00:00 pm"},
+  {hours: "04:00:00 pm"},
+  {hours: "05:00:00 pm"},
+  {hours: "06:00:00 pm"},
+  {hours: "07:00:00 pm"},
+  {hours: "08:00:00 pm"},
+  {hours: "09:00:00 pm"},
+  {hours: "10:00:00 pm"},
+  {hours: "11:00:00 pm"}];
+
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
@@ -29,9 +54,13 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .x(function(d) { return x(parseDate(d.date)); })
       .y(function(d) { return y(parseTime(d.sunrise)); });
 
-  var line2 = d3.svg.line()
+  var sunsetLine = d3.svg.line()
       .x(function(d) { return x(parseDate(d.date)); })
       .y(function(d) { return y(parseTime(d.sunset)); });
+
+  var astroBeginLine = d3.svg.line()
+      .x(function(d) { return x(parseDate(d.date)); })
+      .y(function(d) { return y(parseTime(d.astroTwilightBegin)); });
 
   var svg = d3.select("#visualisation")
       .data(array)
@@ -43,7 +72,7 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
 
 
   x.domain(d3.extent(array, function(d) { return parseDate(d.date); }));
-  y.domain(d3.extent(array, function(d) { return parseTime(d.sunset); }));
+  y.domain(d3.extent(times, function(d) { return parseTime(d.hours); }));
 
   svg.append("g")
       .attr("class", "x axis")
@@ -66,8 +95,15 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
 
   svg.append("path")
       .datum(array)
+      .style("stroke", "red")
       .attr("class", "line")
-      .attr("d", line2);
+      .attr("d", sunsetLine);
+
+  svg.append("path")
+      .datum(array)
+      .style("stroke", "green")
+      .attr("class", "line")
+      .attr("d", astroBeginLine);
 
 
 

@@ -62,6 +62,22 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .x(function(d) { return x(parseDate(d.date)); })
       .y(function(d) { return y(parseTime(d.astroTwilightBegin)); });
 
+  var astroEndLine = d3.svg.line()
+      .x(function(d) { return x(parseDate(d.date)); })
+      .y(function(d) { return y(parseTime(d.astroTwilightEnd)); });
+
+  var nauticalBeginLine = d3.svg.line()
+      .x(function(d) { return x(parseDate(d.date)); })
+      .y(function(d) { return y(parseTime(d.nauticalTwilightBegin)); });
+
+  var nauticalEndLine = d3.svg.line()
+      .x(function(d) { return x(parseDate(d.date)); })
+      .y(function(d) { return y(parseTime(d.nauticalTwilightEnd)); });
+
+  var solarNoonLine = d3.svg.line()
+      .x(function(d) { return x(parseDate(d.date)); })
+      .y(function(d) { return y(parseTime(d.solarNoon)); });
+
   var svg = d3.select("#visualisation")
       .data(array)
       .append("svg")
@@ -104,6 +120,30 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
       .style("stroke", "green")
       .attr("class", "line")
       .attr("d", astroBeginLine);
+
+  svg.append("path")
+      .datum(array)
+      .style("stroke", "purple")
+      .attr("class", "line")
+      .attr("d", astroEndLine);
+
+  svg.append("path")
+      .datum(array)
+      .style("stroke", "orange")
+      .attr("class", "line")
+      .attr("d", nauticalBeginLine);
+
+  svg.append("path")
+      .datum(array)
+      .style("stroke", "black")
+      .attr("class", "line")
+      .attr("d", nauticalEndLine);
+
+  svg.append("path")
+      .datum(array)
+      .style("stroke", "brown")
+      .attr("class", "line")
+      .attr("d", solarNoonLine);
 
 
 

@@ -93,7 +93,7 @@ td {
 /* line 31, ../sass/screen.scss */
 path {
   stroke: steelblue;
-  stroke-width: 1;
+  stroke-width: 2;
   fill: none;
 }
 
@@ -118,4 +118,14 @@ path {
 /* line 67, ../sass/screen.scss */
 .bar {
   fill: FireBrick;
+}
+
+/* line 72, ../sass/screen.scss */
+.legend {
+  font-size: 12px;
+}
+
+/* line 76, ../sass/screen.scss */
+rect {
+  stroke-width: 2;
 }

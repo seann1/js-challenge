@@ -3,7 +3,8 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
     return {
     	makeGraph: function(array) {
 
-  var times = [{hours: "12:00:00 am"},
+  var times =
+    [{hours: "12:00:00 am"},
     {hours: "01:00:00 am"},
     {hours: "02:00:00 am"},
     {hours: "03:00:00 am"},
@@ -28,9 +29,13 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
     {hours: "10:00:00 pm"},
     {hours: "11:00:00 pm"}];
 
+  var legendRectSize = 18;
+  var legendSpacing = 4;
+  var color = d3.scale.category20b();
+  var colorIndex = 0;
 
   var margin = {top: 20, right: 20, bottom: 30, left: 70},
-    width = 960 - margin.left - margin.right,
+    width = 760 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
   var parseDate = d3.time.format("%m-%d-%Y").parse;
@@ -44,7 +49,9 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
 
   var xAxis = d3.svg.axis()
       .scale(x)
-      .orient("bottom");
+      .orient("bottom")
+      .ticks(d3.time.hours, 24)
+      .tickFormat(d3.time.format("%m-%d-%Y"));;
 
   var yAxis = d3.svg.axis()
       .scale(y)
@@ -108,44 +115,58 @@ var app = angular.module("sunrise-times.services", ['ui.bootstrap'])
 
   svg.append("path")
       .datum(array)
+      .style("stroke", "#001893")
       .attr("class", "line")
       .attr("d", line);
 
   svg.append("path")
       .datum(array)
-      .style("stroke", "red")
+      .style("stroke", "#ff001d")
       .attr("class", "line")
       .attr("d", sunsetLine);
 
   svg.append("path")
       .datum(array)
-      .style("stroke", "green")
+      .style("stroke", "#00aeff")
       .attr("class", "line")
       .attr("d", astroBeginLine);
 
   svg.append("path")
       .datum(array)
-      .style("stroke", "purple")
+      .style("stroke", "#00ed5e")
       .attr("class", "line")
       .attr("d", astroEndLine);
 
   svg.append("path")
       .datum(array)
-      .style("stroke", "orange")
+      .style("stroke", "#b8d100")
       .attr("class", "line")
       .attr("d", nauticalBeginLine);
 
   svg.append("path")
       .datum(array)
-      .style("stroke", "black")
+      .style("stroke", "#f28500")
       .attr("class", "line")
       .attr("d", nauticalEndLine);
 
   svg.append("path")
       .datum(array)
-      .style("stroke", "brown")
+      .style("stroke", "#9800ff")
       .attr("class", "line")
       .attr("d", solarNoonLine);
+
+  var legend = svg.selectAll('.legend')
+      .data(color.domain())
+      .enter()
+      .append('g')
+      .attr('class', 'legend')
+  //     .attr('transform', function(d, i) {
+  //       var height = legendRectSize + legendSpacing;
+  //       // var offset =  height * color.domain().length / 2;
+  //       var horz = -2 * legendRectSize;
+  //       var vert = i * height - offset;
+  //       return 'translate(' + horz + ',' + vert + ')';
+  // });
 
 
 

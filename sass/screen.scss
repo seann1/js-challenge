@@ -30,7 +30,7 @@ td {
 
 path {
     stroke: steelblue;
-    stroke-width: 1;
+    stroke-width: 2;
     fill: none;
 }
 
@@ -67,5 +67,13 @@ path {
 .bar
 {
     fill: FireBrick;
+}
+
+.legend {
+    font-size: 12px;
+}
+
+rect {
+    stroke-width: 2;
 }
 
